@@ -38,6 +38,8 @@ $routes->group('vacancies', function ($routes) {
     $routes->get('/', 'Vacancies::index', ['as' => 'vacancies']);
     $routes->get('/(:any)', 'Vacancies::index/$1', ['as' => 'vacancies.order']);
     $routes->get('show/(:num)', 'Vacancies::show/$1', ['as' => 'vacancies.show']);
+    $routes->get('edit/(:num)', 'Vacancies::edit/$1', ['as' => 'vacancies.edit']);
+    $routes->put('update/(:num)', 'Vacancies::update/$1', ['as' => 'vacancies.update']);
     $routes->delete('delete/(:num)', 'Vacancies::delete/$1', ['as' => 'vacancies.delete']);
 });
 

@@ -19,6 +19,22 @@ class VacancyModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    // Validation
+    protected $validationRules = [
+        'title' => 'required|min_length[2]|max_length[120]|is_unique[vacancies.title,id,{id}]',
+        'type' => 'in_list[fr,pf,pf]',
+        'description' => 'required|max_length[500]',
+    ];
+
+    protected $validationMessages = [
+        'title'        => [
+            'is_unique' => 'Essa vaga já existe. Por favor escolha outra.',
+        ],
+        'type'        => [
+            'in_list' => 'O tipo da vaga deve ser: Freelancer ou Pessoa Física ou Pessoa Jurídica',
+        ],
+    ];
+
 
     public function getAll(object $request)
     {

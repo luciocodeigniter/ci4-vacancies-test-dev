@@ -49,4 +49,18 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+    /**
+     * Metodo que remove do POST a posição '_method', para que possamos usar o fill()
+     *
+     * @return array
+     */
+    protected function removeSpoofingFromRequest(): array
+    {
+        $data = $this->request->getPost();
+
+        unset($data['_method']);
+
+        return $data;
+    }
 }

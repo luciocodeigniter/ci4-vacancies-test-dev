@@ -44,6 +44,50 @@ class Vacancies extends BaseController
         return view('Vacancies/show', $data);
     }
 
+    public function edit(int $id = null)
+    {
+        $vacancy = $this->vacancyModel->find($id);
+
+        if (is_null($vacancy)) {
+
+            return redirect()->route('vacancies')->with('danger', "Vaga {$id} não encontrada");
+        }
+
+        $data = [
+            'title'     => "Editando a vaga $vacancy->title",
+            'vacancy'   => $vacancy
+        ];
+
+        return view('Vacancies/edit', $data);
+    }
+
+    public function update(int $id = null)
+    {
+        $vacancy = $this->vacancyModel->find($id);
+
+        if (is_null($vacancy)) {
+
+            return redirect()->route('vacancies')->with('danger', "Vaga {$id} não encontrada");
+        }
+
+        $vacancy->fill($this->removeSpoofingFromRequest());
+
+        if (!$vacancy->hasChanged()) {
+
+            return redirect()->back()->with('info', "Não há dados para atualizar");
+        }
+
+        if (!$this->vacancyModel->save($vacancy)) {
+
+            return redirect()->back()
+                ->with('danger', 'Verifique os erros e tente novamente')
+                ->with('errors_model', $this->vacancyModel->errors())
+                ->withInput();
+        }
+
+        return redirect()->route('vacancies.show', [$vacancy->id])->with('success', "Dados salvos com sucesso!");
+    }
+
 
     public function delete(int $id = null)
     {
