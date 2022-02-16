@@ -38,14 +38,14 @@
 </div>
 
 
-<button type="submit" class="btn btn-primary">Salvar</button>
+<?php echo form_submit('', 'Salvar', ['class' => 'btn btn-success']) ?>
 
 <?php if (is_null($vacancy->id)) : ?>
 
-    <a href="<?php echo route_to('vacancies'); ?>" class="btn btn-secondary">Voltar</a>
+    <?php echo anchor(route_to('vacancies'), 'Voltar', ['class' => 'btn btn-secondary']); ?>
 
 <?php else : ?>
 
-    <a href="<?php echo route_to('vacancies.show', $vacancy->id); ?>" class="btn btn-secondary">Voltar</a>
+    <?php echo anchor(route_to('vacancies.show', $vacancy->id), 'Voltar', ['class' => 'btn btn-secondary']); ?>
 
 <?php endif; ?>

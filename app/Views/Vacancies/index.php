@@ -26,6 +26,9 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
+
+            <?php echo anchor(route_to('vacancies.new'), '+ Nova vaga', ['class' => 'btn btn-success float-right']); ?>
+
             <h1 class="h3 text-gray-800"><?php echo $title ?? ''; ?></h1>
         </div>
         <div class="card-body">
