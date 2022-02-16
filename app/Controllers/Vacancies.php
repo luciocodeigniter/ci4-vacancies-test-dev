@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Entities\Vacancy;
 use CodeIgniter\Config\Factories;
 
 class Vacancies extends BaseController
@@ -24,6 +25,33 @@ class Vacancies extends BaseController
         ];
 
         return view('Vacancies/index', $data);
+    }
+
+    public function new()
+    {
+        $vacancy = new Vacancy(['is_paused' => false]);
+
+        $data = [
+            'title'     => "Criando nova vaga",
+            'vacancy'   => $vacancy
+        ];
+
+        return view('Vacancies/new', $data);
+    }
+
+    public function create()
+    {
+        $vacancy = new Vacancy($this->request->getPost());
+
+        if (!$this->vacancyModel->save($vacancy)) {
+
+            return redirect()->back()
+                ->with('danger', 'Verifique os erros e tente novamente')
+                ->with('errors_model', $this->vacancyModel->errors())
+                ->withInput();
+        }
+
+        return redirect()->route('vacancies.show', [$this->vacancyModel->insertID()])->with('success', "Dados salvos com sucesso!");
     }
 
 

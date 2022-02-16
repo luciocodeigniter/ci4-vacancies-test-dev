@@ -47,11 +47,11 @@
 
                     <?php echo form_hidden('_method', 'DELETE'); ?>
 
-                    <button type="submit" class="btn btn-danger">Excluir</button>
+                    <?php echo form_submit('', 'Excluir', ['class' => 'btn btn-danger']) ?>
 
                     <?php echo form_close(); ?>
 
-                    <a href="<?php echo route_to('vacancies') ?>" class="card-link btn btn-secondary">Voltar</a>
+                    <?php echo anchor(route_to('vacancies'), 'Voltar', ['class' => 'card-link btn btn-secondary']); ?>
 
                 </div>
             </div>
