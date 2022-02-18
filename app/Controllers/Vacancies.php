@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Entities\Vacancy;
+use App\Models\VacancyModel;
 use CodeIgniter\Config\Factories;
 
 class Vacancies extends BaseController
@@ -11,7 +12,7 @@ class Vacancies extends BaseController
 
     public function __construct()
     {
-        $this->vacancyModel = Factories::models('VacancyModel');
+        $this->vacancyModel = Factories::models(VacancyModel::class);
     }
 
     public function index()

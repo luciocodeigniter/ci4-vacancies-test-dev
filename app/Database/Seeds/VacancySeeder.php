@@ -2,6 +2,8 @@
 
 namespace App\Database\Seeds;
 
+use App\Entities\Vacancy;
+use App\Models\VacancyModel;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\Seeder;
 use Exception;
@@ -14,11 +16,11 @@ class VacancySeeder extends Seeder
 
             $this->db->transStart();
 
-            $vacancyModel = Factories::models('VacancyModel');
+            $vacancyModel = Factories::models(VacancyModel::class);
 
             foreach (self::vacancies() as $vacancy) {
 
-                if (!$vacancyModel->save($vacancy)) {
+                if (!$vacancyModel->skipValidation(true)->save($vacancy)) {
 
                     echo '<pre>';
                     print_r($vacancyModel->errors());
