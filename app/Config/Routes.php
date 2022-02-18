@@ -35,12 +35,12 @@ $routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
 
 
 $routes->group('login', function ($routes) {
-    $routes->get('/', 'Login::index', ['as' => 'login']);
+    $routes->get('/', 'Login::index', ['as' => 'login', 'filter' => 'guest']);
     $routes->post('create', 'Login::create', ['as' => 'login.create']);
     $routes->post('logout', 'Login::destroy', ['as' => 'login.destroy']);
 });
 
-$routes->group('vacancies', ['filter' => 'auth'], function ($routes) {
+$routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
     $routes->get('/', 'Vacancies::index', ['as' => 'vacancies']);
     $routes->get('/(:any)', 'Vacancies::index/$1', ['as' => 'vacancies.order']);
     $routes->get('show/(:num)', 'Vacancies::show/$1', ['as' => 'vacancies.show']);

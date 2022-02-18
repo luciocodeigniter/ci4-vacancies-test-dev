@@ -3,15 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Libraries\Auth;
-use CodeIgniter\Config\Factories;
+
+
 
 class Login extends BaseController
 {
-
     public function __construct()
     {
-        $this->auth = Factories::class(Auth::class);
+        $this->auth = service('auth');
     }
 
     public function index()
@@ -44,7 +43,7 @@ class Login extends BaseController
 
             return redirect()->route('home')
                 ->with('success', 'Login realizado com sucesso')
-                ->withCookies(); // withCookies só fazer depois do módulo User completo
+                ->withCookies();
         }
 
         return redirect()->back()->with('danger', 'Verifique suas credenciais e tente novamente')->withInput();
@@ -53,6 +52,8 @@ class Login extends BaseController
 
     public function destroy()
     {
-        return redirect()->route('home')->withCookies(); // Essa parte foi feita após o Módulo User completo
+        $this->auth->logout();
+
+        return redirect()->route('home')->withCookies();
     }
 }

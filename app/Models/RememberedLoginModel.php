@@ -12,9 +12,9 @@ class RememberedLoginModel extends Model
     protected $returnType = 'object';
     protected $allowedFields = ['token_hash', 'user_id', 'expire_at'];
 
-    public function rememberUserLogin($user_id)
-    {
 
+    public function rememberUserLogin(int $user_id)
+    {
         $token = new Token;
 
         $tokenHash = $token->getHash();
@@ -29,10 +29,7 @@ class RememberedLoginModel extends Model
 
         $this->insert($data);
 
-
-        /**
-         * Retornamos esse array para que possamos setar o cookie
-         */
+        // Data to set the cookie
         return [
             $token->getValue(),
             $expiry
@@ -43,37 +40,31 @@ class RememberedLoginModel extends Model
     {
         $token = new Token($token);
 
+        // Get the tokenHash from token
         $tokenHash = $token->getHash();
 
-        $remembered_login = $this->where('token_hash', $tokenHash)->first();
+        // Try to get the row from tokenHash
+        $remenberedLogin = $this->where('token_hash', $tokenHash)->first();
 
-        /**
-         * Verificamos se foi encontrado o registro de acordo com $token_hash
-         */
-        if ($remembered_login) {
+        // Did we find?
+        if (is_null($remenberedLogin)) {
 
-
-            /**
-             * Se $remembered_login->expire_at for maior que a hora e data atuais, então retornamos o objeto $remembered_login
-             */
-            if ($remembered_login->expire_at > date('Y-m-d H:i:s')) {
-
-                return $remembered_login;
-            }
+            return null;
         }
+
+        // Is still valid?
+        if ($remenberedLogin->expire_at < date('Y-m-d H:i:s')) {
+
+            return null;
+        }
+
+        // Yes, is valid
+        return $remenberedLogin;
     }
 
-    /**
-     * @descrição: Esse método será chamado no método logout() da classe Autenticacao e removerá da tabela 'remembered_login'
-     *             o registro de acordo com o $token.
-     * 
-     *             Dessa forma o usuário não será logado automaticamente, pois o token_hash não existe mais na tabela 'remembered_login'
-     * 
-     * @param Token $token
-     */
+
     public function deleteByToken($token)
     {
-
         $token = new Token($token);
 
         $token_hash = $token->getHash();
@@ -81,11 +72,6 @@ class RememberedLoginModel extends Model
         $this->where('token_hash', $token_hash)->delete();
     }
 
-    /**
-     * @descrição retorna número inteiro denotando a quantidade de registros excluídos da tabela 'remembered_login' que estejam expirados
-     * 
-     * @return int 
-     */
     public function deleteExpired()
     {
         $this->where('expire_at <', date('Y-m-d H:i:s'))->delete();

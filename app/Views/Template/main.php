@@ -31,11 +31,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url('/'); ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Vacancies - Dev Test <sup>CI4</sup></div>
             </a>
 
             <!-- Divider -->
@@ -43,11 +43,20 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<?php echo site_url('/'); ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
+
+            <!-- Divider -->
+            <hr class="sidebar-divider mb-0">
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo route_to('vacancies'); ?>">
+                    <i class="fas fa-check"></i>
+                    <span>Gerenciar vagas</span></a>
+            </li>
 
 
             <!-- Divider -->

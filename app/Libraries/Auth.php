@@ -12,10 +12,12 @@ class Auth
     {
         $this->userModel = Factories::models(UserModel::class);
 
+        $this->remeberModel = Factories::models(RememberedLoginModel::class);
+
         $this->user = null;
     }
 
-    public function login(string $email, string $password, bool $rememberMe): bool
+    public function login(string $email, string $password, bool $rememberMe = false): bool
     {
         // Try get the user
         $user = $this->userModel->getByCriteria(['email' => $email]);
@@ -26,7 +28,6 @@ class Auth
 
             return false;
         }
-
 
 
         // Password is valid?
@@ -47,7 +48,7 @@ class Auth
         return true;
     }
 
-    public function getLoggedUser(): null|User
+    public function user(): null|User
     {
         // The property still null?
         if (is_null($this->user)) {
@@ -56,17 +57,41 @@ class Auth
             $this->user = $this->getUserFromSession();
         }
 
+
+        // The property still null?
+        if (is_null($this->user)) {
+
+            // Try get the user from cookie
+            $this->user = $this->getUserFromRememberCookie();
+        }
+
         return $this->user;
     }
 
     public function isLoggedIn(): bool
     {
         // Is anyone in the session?
-        return !is_null($this->getLoggedUser());
+        return !is_null($this->user());
     }
 
     public function logout(): void
     {
+
+        // Try to get the cookie 'remember_me'
+        $token = service('request')->getCookie('remember_me');
+
+        // Did we find?
+        if (!is_null($token)) {
+
+            // We remove from de database
+            $this->remeberModel->deleteByToken($token);
+
+
+            // We remove cookie 
+            service('response')->deleteCookie('remember_me');
+        }
+
+
         session()->destroy();
     }
 
@@ -94,53 +119,36 @@ class Auth
         return $user;
     }
 
-    private function getUserFromRememberCookie()
+    private function getUserFromRememberCookie(): null|User
     {
 
-        /**
-         * Para recuperarmos o cookie precisamos de um objeto request.
-         * Faremos isso utilizando o helper service
-         */
+        // Access the request service
         $request = service('request');
 
-        /**
-         * Recuperando o cookie
-         */
+        // Try to get de cookie 'remember_me'
         $token = $request->getCookie('remember_me');
 
-        /**
-         * Se não exitir um cookie chamado 'remember_me', será retornado null
-         */
+        // Did we find?
         if (is_null($token)) {
 
             return null;
         }
 
+        // Try find user by remeber token
+        $rememberedLogin = $this->remeberModel->findByToken($token);
 
-        $remeberModel = Factories::models(RememberedLoginModel::class);
 
-        $rememberedLogin = $remeberModel->findByToken($token);
-
+        // Did we find?
         if (is_null($rememberedLogin)) {
 
             return null;
         }
 
-        /*
-         * ---------------------------------------------------------------
-         */
 
-        /*
-         * A partir desse ponto, nós já conseguimos recuperar o usuário a partir do objeto $remembered_login
-         * que contém o atributo 'user_id'
-         */
-
+        // Try to get the user
         $user = $this->userModel->getByCriteria(['id' => $rememberedLogin->user_id]);
 
-        /**
-         * Se foi encontrado um user e o mesmo está ativo, setamos o id do mesmo chamado o método logInUser($user)
-         * e retornamos o objeto $user
-         */
+        // Still exists and is active?
         if ($user && $user->is_active) {
 
             $this->letTheUserIn($user);
@@ -162,16 +170,12 @@ class Auth
         return $this->userModel->isAdmin($userId);
     }
 
-    private function rememberLogin(int $userId)
+    private function rememberLogin(int $userId): void
     {
+        // Generate the token cookie
+        list($token, $expiry) = $this->remeberModel->rememberUserLogin($userId);
 
-        $remeberModel = Factories::models(RememberedLoginModel::class);
-
-        list($token, $expiry) = $remeberModel->rememberUserLogin($userId);
-
-        /**
-         * Setando cookie
-         */
+        // Set de cookie on the response
         service('response')->setCookie('remember_me', $token, $expiry);
     }
 }
