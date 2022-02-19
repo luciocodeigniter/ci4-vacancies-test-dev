@@ -40,6 +40,13 @@ $routes->group('login', function ($routes) {
     $routes->post('logout', 'Login::destroy', ['as' => 'login.destroy']);
 });
 
+
+$routes->group('register', function ($routes) {
+    $routes->get('/', 'Register::index', ['as' => 'register', 'filter' => 'guest']);
+    $routes->post('create', 'Register::create', ['as' => 'register.create']);
+    $routes->get('success', 'Register::success', ['as' => 'register.success']);
+});
+
 $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
     $routes->get('/', 'Vacancies::index', ['as' => 'vacancies']);
     $routes->get('/(:any)', 'Vacancies::index/$1', ['as' => 'vacancies.order']);

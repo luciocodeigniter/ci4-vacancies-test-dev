@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Libraries\Token;
 use CodeIgniter\Entity\Entity;
 
 class User extends Entity
@@ -14,5 +15,16 @@ class User extends Entity
     public function validatePassword(string $password): bool
     {
         return password_verify($password, $this->password_hash);
+    }
+
+    public function startActivation()
+    {
+        $token = new Token();
+
+        // Create the property 'token' to user object to send to email account activation
+        $this->token = $token->getValue();
+
+        // Generate the hash to store in database
+        $this->activation_hash = $token->getHash();
     }
 }

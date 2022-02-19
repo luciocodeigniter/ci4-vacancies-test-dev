@@ -10,8 +10,9 @@ class UserModel extends Model
     protected $table            = 'users';
     protected $returnType       = User::class;
     protected $allowedFields    = [
-        'name', 'email', 'is_active', 'password', 'reset_hash', 'reset_expire_at', ''
+        'name', 'email', 'activation_hash', 'password', 'reset_hash', 'reset_expire_at'
     ];
+
 
     // Dates
     protected $useTimestamps = true;
