@@ -45,6 +45,7 @@ $routes->group('register', function ($routes) {
     $routes->get('/', 'Register::index', ['as' => 'register', 'filter' => 'guest']);
     $routes->post('create', 'Register::create', ['as' => 'register.create']);
     $routes->get('success', 'Register::success', ['as' => 'register.success']);
+    $routes->get('activate/(:any)', 'Register::activate/$1', ['as' => 'register.activate']);
 });
 
 $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {

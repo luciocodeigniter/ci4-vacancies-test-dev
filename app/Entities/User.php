@@ -27,4 +27,10 @@ class User extends Entity
         // Generate the hash to store in database
         $this->activation_hash = $token->getHash();
     }
+
+    public function activate()
+    {
+        $this->is_active = true;
+        $this->activation_hash = null;
+    }
 }

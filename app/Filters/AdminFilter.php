@@ -25,7 +25,12 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //
+        $this->user = service('auth')->user();
+
+        if (!$this->user->is_admin) {
+
+            return redirect()->back()->with('info', 'Esta área só pode ser acessada por um administrador');
+        }
     }
 
     /**
@@ -42,11 +47,5 @@ class AdminFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        $this->user = service('auth')->user();
-
-        if (!$this->user->is_admin) {
-
-            return redirect()->back()->with('warning', 'Esta área só pode ser acessada por um administrador');
-        }
     }
 }

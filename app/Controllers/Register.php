@@ -58,4 +58,15 @@ class Register extends BaseController
 
         return view('Register/success', $data);
     }
+
+
+    public function activate(string $token = null)
+    {
+        if (!$this->userModel->activateByToken($token)) {
+
+            return redirect()->route('login')->with('danger', 'Não conseguimos ativar a sua conta. Por favor entre em contato com nosso suporte');
+        }
+
+        return redirect()->route('login')->with('success', 'Sua conta foi ativada com sucesso');
+    }
 }

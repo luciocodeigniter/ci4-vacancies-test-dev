@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Entities\User;
+use App\Libraries\Token;
 use CodeIgniter\Model;
 
 class UserModel extends Model
@@ -73,5 +74,27 @@ class UserModel extends Model
         $query = $this->db->table('users_admin')->where('user_id', $userId);
 
         return $query->get()->getRow() !== null;
+    }
+
+    public function activateByToken(string $token): bool
+    {
+        $token = new Token($token);
+
+        // Generate de hash from token
+        $tokenHash = $token->getHash();
+
+        // Try to get the user who has the $tokenHash
+        $user = $this->where('activation_hash', $tokenHash)->first();
+
+        // Did we find?
+        if (is_null($user)) {
+
+            return false;
+        }
+
+        // Activate the user
+        $user->activate();
+
+        return $this->protect(false)->save($user);
     }
 }

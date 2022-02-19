@@ -52,11 +52,15 @@
             <!-- Divider -->
             <hr class="sidebar-divider mb-0">
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo route_to('vacancies'); ?>">
-                    <i class="fas fa-check"></i>
-                    <span>Gerenciar vagas</span></a>
-            </li>
+            <?php if (auth()->user->is_admin) : ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo route_to('vacancies'); ?>">
+                        <i class="fas fa-check"></i>
+                        <span>Gerenciar vagas</span></a>
+                </li>
+
+            <?php endif; ?>
 
 
             <!-- Divider -->
