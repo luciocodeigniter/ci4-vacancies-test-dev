@@ -97,4 +97,32 @@ class UserModel extends Model
 
         return $this->protect(false)->save($user);
     }
+
+    public function getUserForPasswordReset(string $token)
+    {
+        $token = new Token($token);
+
+        // Get hash from token
+        $tokenHash = $token->getHash();
+
+        // Try get the user from tokenHash
+        $user = $this->where('reset_hash', $tokenHash)->first();
+
+        // Did we find?
+        if (is_null($user)) {
+
+            return null;
+        }
+
+        // Good! User found. Now we validate de expiration of token
+        // The expiration of token is greather than current datetime?
+        if ($user->reset_expire_at > date('Y-m-d H:i:s')) {
+
+            // Ohh no! Is expired...
+            return null;
+        }
+
+        // Nice! Still valid!
+        return $user;
+    }
 }

@@ -55,4 +55,9 @@ Events::on('pre_system', static function () {
 
         Factories::class(Notify::class)->sendEmailActivation($email, $token);
     });
+
+    Events::on('send_recovery_email', function ($email, $token) {
+
+        Factories::class(Notify::class)->sendEmailPasswordRecovery($email, $token);
+    });
 });

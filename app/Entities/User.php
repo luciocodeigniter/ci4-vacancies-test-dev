@@ -33,4 +33,25 @@ class User extends Entity
         $this->is_active = true;
         $this->activation_hash = null;
     }
+
+    public function startPasswordReset()
+    {
+        $token = new Token();
+
+        // Create the property 'token' that will be used to send to email user for revovery
+        $this->token = $token->getValue();
+
+        // Generate the reset_hash from token that will be stored
+        $this->reset_hash = $token->getHash();
+
+        // Generate the expiration date for token that will be send to user
+        $this->reset_expires_at = date('Y-m-d H:i:s', time() + 7200); // 2 hours from now
+    }
+
+
+    public function completePasswordReset()
+    {
+        $this->reset_hash = null;
+        $this->reset_expires_at = null;
+    }
 }

@@ -16,7 +16,9 @@ class Login extends BaseController
     public function index()
     {
 
-        return view('Login/index');
+        $data = ['title' => 'Realize o login'];
+
+        return view('Login/index', $data);
     }
 
     public function create()

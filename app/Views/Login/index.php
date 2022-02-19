@@ -48,7 +48,7 @@
             <hr>
             <?php echo form_close(); ?>
             <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                <a class="small" href="<?php echo route_to('password') ?>">Esqueci minha senha</a>
             </div>
             <div class="text-center">
                 <a class="small" href="<?php echo route_to('register'); ?>">Criar minha conta!</a>
