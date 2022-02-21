@@ -50,7 +50,7 @@ class VacancySeeder extends Seeder
 
             [
                 'title'         => 'Desenvolvedor FrontEnd Júnior',
-                'type'          => 'pf',
+                'type'          => 'clt',
                 'is_paused'     => true,
                 'description'   => 'Vaga para Desenvolvedor FrontEnd Júnior 100% remoto',
             ],

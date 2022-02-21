@@ -14,7 +14,15 @@ class Vacancy extends Entity
 
     public function type()
     {
-        return $this->attributes['type'] === 'pj' ? 'Pessoa Jurídica' : ($this->attributes['type'] === 'pf' ? 'Pessoa Físca' : 'Freelancer');
+
+        $type = match ($this->attributes['type']) {
+            'pj'        => 'Contrato - Pessoa Jurídica',
+            'clt'       => 'CLT - Pessoa Física',
+            'fr'        => 'Contrato - Freelancer',
+            default     => 'Tipo desconhecido'
+        };
+
+        return $type;
     }
 
     public function isPaused()

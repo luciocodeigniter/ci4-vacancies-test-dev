@@ -30,7 +30,7 @@ class CreateTableVacancies extends Migration
             ],
             'type'      => [
                 'type'           => 'ENUM',
-                'constraint'     => ['fr', 'pf', 'pj'],
+                'constraint'     => ['fr', 'clt', 'pj'],
             ],
             'created_at' => [
                 'type' => 'DATETIME',

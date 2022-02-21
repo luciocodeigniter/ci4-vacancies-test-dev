@@ -22,7 +22,6 @@ class Auth
         // Try get the user
         $user = $this->userModel->getByCriteria(['email' => $email]);
 
-
         // Was found or is active?
         if (is_null($user) || !$user->is_active) {
 
@@ -62,7 +61,7 @@ class Auth
         if (is_null($this->user)) {
 
             // Try get the user from cookie
-            $this->user = $this->getUserFromRememberCookie();
+            $this->user = $this->getUserFromCookie();
         }
 
         return $this->user;
@@ -119,7 +118,7 @@ class Auth
         return $user;
     }
 
-    private function getUserFromRememberCookie(): null|User
+    private function getUserFromCookie(): null|User
     {
 
         // Access the request service

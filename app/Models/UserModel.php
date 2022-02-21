@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Entities\User;
+use App\Libraries\Token;
 use CodeIgniter\Model;
 
 class UserModel extends Model
@@ -10,8 +11,9 @@ class UserModel extends Model
     protected $table            = 'users';
     protected $returnType       = User::class;
     protected $allowedFields    = [
-        'name', 'email', 'is_active', 'password', 'reset_hash', 'reset_expire_at', ''
+        'name', 'email', 'activation_hash', 'password', 'reset_hash', 'reset_expire_at'
     ];
+
 
     // Dates
     protected $useTimestamps = true;
@@ -72,5 +74,79 @@ class UserModel extends Model
         $query = $this->db->table('users_admin')->where('user_id', $userId);
 
         return $query->get()->getRow() !== null;
+    }
+
+    public function activateByToken(string $token): bool
+    {
+        $token = new Token($token);
+
+        // Generate de hash from token
+        $tokenHash = $token->getHash();
+
+        // Try to get the user who has the $tokenHash
+        $user = $this->where('activation_hash', $tokenHash)->first();
+
+        // Did we find?
+        if (is_null($user)) {
+
+            return false;
+        }
+
+        // Activate the user
+        $user->activate();
+
+        return $this->protect(false)->save($user);
+    }
+
+    public function getUserForPasswordReset(string $token)
+    {
+        $token = new Token($token);
+
+        // Get hash from token
+        $tokenHash = $token->getHash();
+
+        // Try get the user from tokenHash
+        $user = $this->where('reset_hash', $tokenHash)->first();
+
+        // Did we find?
+        if (is_null($user)) {
+
+            return null;
+        }
+
+        // Good! User found. Now we validate de expiration of token
+        // The expiration of token is greather than current datetime?
+        if ($user->reset_expire_at > date('Y-m-d H:i:s')) {
+
+            // Ohh no! Is expired...
+            return null;
+        }
+
+        // Nice! Still valid!
+        return $user;
+    }
+
+    public function getCandidates(object $request)
+    {
+
+        $usersId = $this->db->table('users_admin')->get()->getResult();
+        $usersId = array_column($usersId, 'user_id');
+
+        $this->whereNotIn('id', $usersId);
+
+        if (!isset($request->order)) {
+
+            return $this->paginate(20);
+        }
+
+        $cadidates = match ($request->order) {
+
+            'id' => $this->orderBy('id', 'DESC')->paginate(20),
+            'name' => $this->orderBy('name', 'ASC')->paginate(20),
+            'email' => $this->orderBy('email', 'ASC')->paginate(20),
+            default => throw new \Exception('Unsupported'),
+        };
+
+        return $cadidates;
     }
 }

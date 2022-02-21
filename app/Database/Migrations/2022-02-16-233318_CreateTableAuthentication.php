@@ -38,6 +38,12 @@ class CreateTableAuthentication extends Migration
                 'null' => true,
                 'default' => null,
             ],
+            'activation_hash' => [
+                'type' => 'VARCHAR',
+                'constraint' => '64',
+                'null' => true,
+                'default' => null,
+            ],
             'is_active' => [
                 'type' => 'BOOLEAN',
                 'null' => false,

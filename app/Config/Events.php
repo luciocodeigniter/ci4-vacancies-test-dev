@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Notifications\Notify;
+use CodeIgniter\Config\Factories;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 
@@ -43,8 +45,19 @@ Events::on('pre_system', static function () {
      * --------------------------------------------------------------------
      * If you delete, they will no longer be collected.
      */
-    if (CI_DEBUG && ! is_cli()) {
+    if (CI_DEBUG && !is_cli()) {
         Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
         Services::toolbar()->respond();
     }
+
+
+    Events::on('notity_activation_email', function ($email, $token) {
+
+        Factories::class(Notify::class)->sendEmailActivation($email, $token);
+    });
+
+    Events::on('send_recovery_email', function ($email, $token) {
+
+        Factories::class(Notify::class)->sendEmailPasswordRecovery($email, $token);
+    });
 });

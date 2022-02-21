@@ -34,12 +34,33 @@ $routes->setAutoRoute(false);
 $routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
 
 
+// Login
 $routes->group('login', function ($routes) {
     $routes->get('/', 'Login::index', ['as' => 'login', 'filter' => 'guest']);
     $routes->post('create', 'Login::create', ['as' => 'login.create']);
     $routes->post('logout', 'Login::destroy', ['as' => 'login.destroy']);
 });
 
+
+// Register
+$routes->group('register', function ($routes) {
+    $routes->get('/', 'Register::index', ['as' => 'register', 'filter' => 'guest']);
+    $routes->post('create', 'Register::create', ['as' => 'register.create']);
+    $routes->get('success', 'Register::success', ['as' => 'register.success']);
+    $routes->get('activate/(:any)', 'Register::activate/$1', ['as' => 'register.activate']);
+});
+
+// Password recovery
+$routes->group('password', function ($routes) {
+    $routes->get('/', 'Password::index', ['as' => 'password', 'filter' => 'guest']);
+    $routes->post('recovery', 'Password::recovery', ['as' => 'password.recovery']);
+    $routes->get('reset/(:any)', 'Password::reset/$1', ['as' => 'password.reset']);
+    $routes->get('reset-send', 'Password::resetSend', ['as' => 'password.reset.send']);
+    $routes->post('create/(:any)', 'Password::create/$1', ['as' => 'password.create']);
+});
+
+
+// Vacancies
 $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
     $routes->get('/', 'Vacancies::index', ['as' => 'vacancies']);
     $routes->get('/(:any)', 'Vacancies::index/$1', ['as' => 'vacancies.order']);
@@ -50,6 +71,14 @@ $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
     $routes->put('update/(:num)', 'Vacancies::update/$1', ['as' => 'vacancies.update']);
     $routes->delete('delete/(:num)', 'Vacancies::delete/$1', ['as' => 'vacancies.delete']);
 });
+
+
+// Vacancies
+$routes->group('candidates', ['filter' => 'admin'], function ($routes) {
+    $routes->get('/', 'Candidates::index', ['as' => 'candidates']);
+    $routes->get('/(:any)', 'Candidates::index/$1', ['as' => 'candidates.order']);
+});
+
 
 /*
  * --------------------------------------------------------------------
