@@ -22,7 +22,6 @@ class Auth
         // Try get the user
         $user = $this->userModel->getByCriteria(['email' => $email]);
 
-
         // Was found or is active?
         if (is_null($user) || !$user->is_active) {
 

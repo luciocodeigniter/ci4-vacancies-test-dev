@@ -10,9 +10,9 @@
     <select name="type" class="form-control">
 
         <option value="">Escolha...</option>
-        <option value="fr" <?php echo ($vacancy->type === 'fr' ? 'selected' : ''); ?>>Freelancer</option>
-        <option value="pf" <?php echo ($vacancy->type === 'pf' ? 'selected' : ''); ?>>Pessoa Física</option>
-        <option value="pj" <?php echo ($vacancy->type === 'pj' ? 'selected' : ''); ?>>Pessoa Jurídica</option>
+        <option value="fr" <?php echo ($vacancy->type === 'fr' ? 'selected' : ''); ?>>Contrato - Freelancer</option>
+        <option value="clt" <?php echo ($vacancy->type === 'clt' ? 'selected' : ''); ?>>CLT - Pessoa Física</option>
+        <option value="pj" <?php echo ($vacancy->type === 'pj' ? 'selected' : ''); ?>>Contrato - Pessoa Jurídica</option>
 
     </select>
 

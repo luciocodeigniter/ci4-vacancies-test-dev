@@ -24,7 +24,7 @@ class AdminSeeder extends Seeder
                 'password'  => '123456',
             ]);
 
-            if (!$userId = $userModel->skipValidation(true)->insert($user)) {
+            if (!$userId = $userModel->skipValidation(true)->protect(false)->insert($user)) {
 
                 dd($userModel->errors());
             }

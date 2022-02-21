@@ -22,7 +22,7 @@ class VacancyModel extends Model
     // Validation
     protected $validationRules = [
         'title' => 'required|min_length[2]|max_length[120]|is_unique[vacancies.title,id,{id}]',
-        'type' => 'in_list[fr,pf,pf]',
+        'type' => 'in_list[fr,clt,pj]',
         'description' => 'required|max_length[500]',
     ];
 
