@@ -73,10 +73,11 @@ $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
 });
 
 
-// Vacancies
+// Candidates
 $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
     $routes->get('/', 'Candidates::index', ['as' => 'candidates']);
     $routes->get('/(:any)', 'Candidates::index/$1', ['as' => 'candidates.order']);
+    $routes->get('show/(:num)', 'Candidates::show/$1', ['as' => 'candidates.show']);
 });
 
 

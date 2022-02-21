@@ -149,4 +149,15 @@ class UserModel extends Model
 
         return $cadidates;
     }
+
+    public function getCandidate(int $id)
+    {
+
+        $usersId = $this->db->table('users_admin')->get()->getResult();
+        $usersId = array_column($usersId, 'user_id');
+
+        $this->whereNotIn('id', $usersId);
+
+        return $this->find($id);
+    }
 }
