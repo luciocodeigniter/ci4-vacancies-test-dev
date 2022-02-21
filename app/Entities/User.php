@@ -54,4 +54,9 @@ class User extends Entity
         $this->reset_hash = null;
         $this->reset_expires_at = null;
     }
+
+    public function active()
+    {
+        return $this->is_active ? 'Liberado' : 'Bloqueado';
+    }
 }

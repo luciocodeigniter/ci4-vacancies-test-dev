@@ -72,6 +72,14 @@ $routes->group('vacancies', ['filter' => 'admin'], function ($routes) {
     $routes->delete('delete/(:num)', 'Vacancies::delete/$1', ['as' => 'vacancies.delete']);
 });
 
+
+// Vacancies
+$routes->group('candidates', ['filter' => 'admin'], function ($routes) {
+    $routes->get('/', 'Candidates::index', ['as' => 'candidates']);
+    $routes->get('/(:any)', 'Candidates::index/$1', ['as' => 'candidates.order']);
+});
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -44,7 +44,7 @@ class VacancyModel extends Model
             return $this->paginate(20);
         }
 
-        $order = match ($request->order) {
+        $vacancies = match ($request->order) {
 
             'id' => $this->orderBy('id', 'DESC')->paginate(20),
             'title' => $this->orderBy('title', 'ASC')->paginate(20),
@@ -55,6 +55,6 @@ class VacancyModel extends Model
         };
 
 
-        return $order;
+        return $vacancies;
     }
 }

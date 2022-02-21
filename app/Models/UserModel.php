@@ -125,4 +125,28 @@ class UserModel extends Model
         // Nice! Still valid!
         return $user;
     }
+
+    public function getCandidates(object $request)
+    {
+
+        $usersId = $this->db->table('users_admin')->get()->getResult();
+        $usersId = array_column($usersId, 'user_id');
+
+        $this->whereNotIn('id', $usersId);
+
+        if (!isset($request->order)) {
+
+            return $this->paginate(20);
+        }
+
+        $cadidates = match ($request->order) {
+
+            'id' => $this->orderBy('id', 'DESC')->paginate(20),
+            'name' => $this->orderBy('name', 'ASC')->paginate(20),
+            'email' => $this->orderBy('email', 'ASC')->paginate(20),
+            default => throw new \Exception('Unsupported'),
+        };
+
+        return $cadidates;
+    }
 }
