@@ -57,6 +57,6 @@ class User extends Entity
 
     public function active()
     {
-        return $this->is_active ? 'Liberado' : 'Bloqueado';
+        return $this->is_active ? 'Acesso Liberado' : 'Acesso Bloqueado';
     }
 }

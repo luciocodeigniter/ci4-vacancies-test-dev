@@ -24,17 +24,13 @@
     <textarea name="description" class="form-control" id="description" rows="3"><?php echo old('description', $vacancy->description); ?></textarea>
 </div>
 
-<div class="form-check">
-    <input class="form-check-input" type="radio" name="is_paused" id="exampleRadios1" value="0" <?php if (!$vacancy->is_paused) : ?> checked <?php endif; ?> <?php echo set_checkbox('is_paused', '0', $vacancy->is_paused ?? false); ?>>
-    <label class="form-check-label" for="exampleRadios1">
-        Vaga liberada para candidaturas
-    </label>
-</div>
-<div class="form-check mb-4">
-    <input class="form-check-input" type="radio" name="is_paused" id="exampleRadios2" value="1" <?php if ($vacancy->is_paused) : ?> checked <?php endif; ?> <?php echo set_checkbox('is_paused', '1', $vacancy->is_paused ?? false); ?>>
-    <label class="form-check-label" for="exampleRadios2">
-        Vaga pausada para candidaturas
-    </label>
+<div class="custom-control custom-checkbox my-1 mr-sm-2 mb-4">
+
+    <input type="hidden" name="is_paused" value="0">
+
+    <input type="checkbox" name="is_paused" value="1" <?php echo set_checkbox('is_paused', '1', $vacancy->is_paused); ?> class="custom-control-input" id="is_paused">
+
+    <label class="custom-control-label" for="is_paused">Vaga pausada para candidatura</label>
 </div>
 
 
