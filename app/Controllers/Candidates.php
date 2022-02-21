@@ -25,4 +25,21 @@ class Candidates extends BaseController
 
         return view('Candidates/index', $data);
     }
+
+    public function show(int $id = null)
+    {
+        $candidate = $this->userModel->getCandidate($id);
+
+        if (is_null($candidate)) {
+
+            return redirect()->route('candidates')->with('danger', "Candidato {$id} não encontrado");
+        }
+
+        $data = [
+            'title'     => "Detalhes do candidato $candidate->name",
+            'candidate'   => $candidate
+        ];
+
+        return view('Candidates/show', $data);
+    }
 }

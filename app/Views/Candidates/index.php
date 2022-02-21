@@ -81,7 +81,7 @@
                                 <td><?php echo $candidate->active(); ?></td>
                                 <td><?php echo $candidate->created_at->humanize(); ?></td>
                                 <td>
-                                    <?php echo anchor(route_to('candidate.show', $candidate->id), '<i class="fas fa-eye"></i>', 'btn btn-primary'); ?>
+                                    <?php echo anchor(route_to('candidates.show', $candidate->id), '<i class="fas fa-eye"></i>', 'btn btn-primary'); ?>
                                 </td>
 
                             </tr>

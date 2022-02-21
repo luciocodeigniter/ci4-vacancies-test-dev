@@ -35,7 +35,7 @@
 
                     <p class="card-text">Título: <?php echo $vacancy->title; ?></p>
                     <p class="card-text">Criada há: <?php echo $vacancy->created_at->humanize(); ?></p>
-                    <p class="card-text">Atualizada há: <?php echo $vacancy->created_at->humanize(); ?></p>
+                    <p class="card-text">Atualizada há: <?php echo $vacancy->updated_at->humanize(); ?></p>
                     <p class="card-text">Tipo da vaga: <?php echo $vacancy->type(); ?></p>
                     <p class="card-text">Situação da vaga: <?php echo $vacancy->isPaused(); ?></p>
                     <p class="card-text">Descrição: <?php echo $vacancy->description; ?></p>
