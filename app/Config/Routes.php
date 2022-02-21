@@ -78,6 +78,9 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
     $routes->get('/', 'Candidates::index', ['as' => 'candidates']);
     $routes->get('/(:any)', 'Candidates::index/$1', ['as' => 'candidates.order']);
     $routes->get('show/(:num)', 'Candidates::show/$1', ['as' => 'candidates.show']);
+    $routes->get('edit/(:num)', 'Candidates::edit/$1', ['as' => 'candidates.edit']);
+    $routes->put('update/(:num)', 'Candidates::update/$1', ['as' => 'candidates.update']);
+    $routes->delete('delete/(:num)', 'Candidates::delete/$1', ['as' => 'candidates.delete']);
 });
 
 

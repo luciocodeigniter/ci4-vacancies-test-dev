@@ -160,4 +160,10 @@ class UserModel extends Model
 
         return $this->find($id);
     }
+
+    public function disablePasswordValidation()
+    {
+        unset($this->validationRules['password']);
+        unset($this->validationRules['password_confirmation']);
+    }
 }
