@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use CodeIgniter\Config\Factories;
+use App\Entities\User as Candidate;
 
 class Candidates extends BaseController
 {
@@ -26,6 +27,33 @@ class Candidates extends BaseController
         return view('Candidates/index', $data);
     }
 
+    public function new()
+    {
+        $candidate = new Candidate(['is_active' => false]);
+
+        $data = [
+            'title'     => "Editando o candidato $candidate->name",
+            'candidate'   => $candidate
+        ];
+
+        return view('Candidates/new', $data);
+    }
+
+    public function create()
+    {
+        $candidate = new Candidate($this->request->getPost());
+
+        if (!$this->userModel->protect(false)->save($candidate)) {
+
+            return redirect()->back()
+                ->with('danger', 'Verifique os erros e tente novamente')
+                ->with('errors_model', $this->userModel->errors())
+                ->withInput();
+        }
+
+        return redirect()->route('candidates.show', [$this->userModel->getInsertID()])->with('success', "Dados salvos com sucesso!");
+    }
+
     public function show(int $id = null)
     {
         $candidate = $this->userModel->getCandidate($id);
@@ -42,7 +70,6 @@ class Candidates extends BaseController
 
         return view('Candidates/show', $data);
     }
-
 
     public function edit(int $id = null)
     {
