@@ -64,7 +64,37 @@
                 </div>
                 <div class="card-body">
 
-                    //// candidaturas
+                    <?php if (empty($candidate->applications)) : ?>
+
+                        <div class="alert alert-info">Não há dados para exibir</div>
+
+                    <?php else : ?>
+
+                        <table class="table table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Vaga</th>
+                                    <th scope="col">Data candidatura</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($candidate->applications as $application) : ?>
+
+                                    <tr>
+                                        <td>
+                                            <?php echo anchor(route_to('vacancies.show', $application->vacancy_id), $application->title, 'btn btn-link'); ?>
+                                        </td>
+                                        <td><?php echo $application->created_at; ?></td>
+                                    </tr>
+
+                                <?php endforeach; ?>
+
+                            </tbody>
+                        </table>
+
+                    <?php endif; ?>
 
                 </div>
             </div>

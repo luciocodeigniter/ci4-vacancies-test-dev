@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Entities\User;
 use App\Libraries\Token;
+use CodeIgniter\Config\Factories;
 use CodeIgniter\Model;
+use PharIo\Manifest\Application;
 
 class UserModel extends Model
 {
@@ -158,7 +160,11 @@ class UserModel extends Model
 
         $this->whereNotIn('id', $usersId);
 
-        return $this->find($id);
+        $candidate = $this->find($id);
+
+        $candidate->applications = Factories::models(ApplicationModel::class)->applications($candidate->id);
+
+        return $candidate;
     }
 
     public function disablePasswordValidation()
