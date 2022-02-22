@@ -66,7 +66,7 @@
 
                     <?php if (empty($candidate->applications)) : ?>
 
-                        <div class="alert alert-info">Não há dados para exibir.</div>
+                        <div class="alert alert-info">Não há dados para exibir</div>
 
                     <?php else : ?>
 
