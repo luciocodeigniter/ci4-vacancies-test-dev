@@ -53,13 +53,27 @@
             <hr class="sidebar-divider mb-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo route_to('candidates'); ?>">
-                    <i class="fas fa-users"></i>
-                    <span>Gerenciar candidatos</span></a>
+                <a class="nav-link" href="<?php echo route_to('jobs'); ?>">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Veja as vagas</span></a>
             </li>
 
 
             <hr class="sidebar-divider mb-0">
+
+
+            <?php if (auth()->user->is_admin) : ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo route_to('candidates'); ?>">
+                        <i class="fas fa-users"></i>
+                        <span>Gerenciar candidatos</span></a>
+                </li>
+
+                <hr class="sidebar-divider mb-0">
+
+            <?php endif; ?>
+
 
             <?php if (auth()->user->is_admin) : ?>
 

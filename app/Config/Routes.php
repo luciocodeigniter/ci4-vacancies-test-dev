@@ -86,6 +86,12 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
 });
 
 
+// Jobs - applications
+$routes->group('jobs', ['filter' => 'auth'], function ($routes) {
+    $routes->get('/', 'Jobs::index', ['as' => 'jobs']);
+});
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

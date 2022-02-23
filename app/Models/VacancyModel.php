@@ -57,4 +57,21 @@ class VacancyModel extends Model
 
         return $vacancies;
     }
+
+
+    public function getAllForApplications()
+    {
+
+        $tableFields = [
+            'applications.user_id',
+            'applications.vacancy_id',
+            'vacancies.*'
+        ];
+
+        return $this
+            ->select($tableFields)
+            ->join('applications', 'applications.vacancy_id = vacancies.id', 'LEFT')
+            ->where('is_paused', false)
+            ->findAll();
+    }
 }
