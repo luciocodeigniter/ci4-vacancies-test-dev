@@ -16,11 +16,25 @@ class Jobs extends BaseController
 
     public function index()
     {
+
+        helper('jobs');
+
         $data = [
             'title' => 'Conheça as nossas vagas',
             'jobs'  => $this->vacancyModel->getAllForApplications()
         ];
 
         return view('Jobs/index', $data);
+    }
+
+
+    public function apply(int $id = null)
+    {
+        dd($this->request->getPost());
+    }
+
+    public function givUp(int $id = null)
+    {
+        dd($this->request->getPost());
     }
 }

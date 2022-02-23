@@ -66,18 +66,15 @@
 
                         </div>
 
-                        <?php echo form_open(route_to($job->user_id == auth()->user()->id ? 'jobs.givup' : 'jobs.apply'), $job->id); ?>
 
-
-                        
 
                         <div class="card-footer bg-white">
-                            <button class="btn btn-<?php echo ($job->user_id == auth()->user()->id ? 'warning' : 'success'); ?> btn-sm">
-                                <?php echo ($job->user_id == auth()->user()->id ? 'Desistir' : 'Aplicar'); ?>
-                            </button>
+
+                            <?php echo render_form_to_apply_givup($job); ?>
+
                         </div>
 
-                        <?php echo form_close(); ?>
+
 
                     </div>
 
