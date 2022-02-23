@@ -29,6 +29,17 @@ if (!function_exists('render_form_to_apply_givup')) {
             'class'     => "btn btn-sm btn-" . ($user->id == $job->user_id ? 'warning' : 'success'),
         ];
 
-        return form_open($routeTo, [], $hiddens) . form_submit($buttomAttr) . form_close();
+
+        $formAttr = [
+            'onClick'   => "return confirm('Tem certeza que deseja desistar dessa vaga?');",
+        ];
+
+        // Confirmation will be displayed only only if it's quitting
+        if ($user->id != $job->user_id) {
+
+            unset($formAttr['onClick']);
+        }
+
+        return form_open($routeTo, $formAttr, $hiddens) . form_submit($buttomAttr) . form_close();
     }
 }

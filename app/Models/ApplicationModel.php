@@ -30,4 +30,21 @@ class ApplicationModel extends Model
             ->orderBy('applications.created_at', 'DESC')
             ->findAll();
     }
+
+
+    public function candidateHasThisJob(int $vacancyID): bool
+    {
+        $userAlreadyApplied = $this->where('vacancy_id', $vacancyID)->where('user_id', service('auth')->user()->id)->first();
+
+        return $userAlreadyApplied !== null;
+    }
+
+
+    public function destroyCandidateApplication(int $vacancyID)
+    {
+        return $this
+            ->where('user_id', service('auth')->user()->id)
+            ->where('vacancy_id', $vacancyID)
+            ->delete();
+    }
 }

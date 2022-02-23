@@ -61,12 +61,10 @@
                             </p>
 
                             <p class="card-text">
-                                Cadastrada há: <?php echo $job->created_at->humanize(); ?>
+                                Publicada há: <?php echo $job->created_at->humanize(); ?>
                             </p>
 
                         </div>
-
-
 
                         <div class="card-footer bg-white">
 
