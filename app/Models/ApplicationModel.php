@@ -24,10 +24,35 @@ class ApplicationModel extends Model
     {
         $userID = $candidateID ?? service('auth')->user()->id;
 
+        $tableFields = [
+            'vacancies.*',
+            'applications.user_id',
+            'applications.vacancy_id',
+            'applications.created_at AS applied_at',
+        ];
+
         return $this
+            ->select($tableFields)
             ->join('vacancies', 'vacancies.id = applications.vacancy_id')
             ->where('applications.user_id', $userID)
             ->orderBy('applications.created_at', 'DESC')
             ->findAll();
+    }
+
+
+    public function candidateHasThisJob(int $vacancyID): bool
+    {
+        $userAlreadyApplied = $this->where('vacancy_id', $vacancyID)->where('user_id', service('auth')->user()->id)->first();
+
+        return $userAlreadyApplied !== null;
+    }
+
+
+    public function destroyCandidateApplication(int $vacancyID)
+    {
+        return $this
+            ->where('user_id', service('auth')->user()->id)
+            ->where('vacancy_id', $vacancyID)
+            ->delete();
     }
 }
