@@ -11,7 +11,6 @@ use \Firebase\JWT\JWT;
 
 class Login extends BaseController
 {
-
     use ResponseTrait;
 
     public function __construct()
