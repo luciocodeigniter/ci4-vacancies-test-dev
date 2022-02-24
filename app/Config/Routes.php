@@ -82,6 +82,7 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
     $routes->get('edit/(:num)', 'Candidates::edit/$1', ['as' => 'candidates.edit']);
     $routes->put('update/(:num)', 'Candidates::update/$1', ['as' => 'candidates.update']);
     $routes->delete('delete/(:num)', 'Candidates::delete/$1', ['as' => 'candidates.delete']);
+    $routes->delete('delete-all', 'Candidates::deleteAllSelected', ['as' => 'candidates.delete.all']);
 });
 
 
