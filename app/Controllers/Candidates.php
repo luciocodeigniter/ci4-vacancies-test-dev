@@ -17,7 +17,6 @@ class Candidates extends BaseController
     public function index()
     {
 
-
         $data = [
             'title'         => 'Listando os candidatos',
             'candidates'    => $this->candidateModel->getCandidates(),
@@ -136,5 +135,31 @@ class Candidates extends BaseController
         $this->candidateModel->delete($candidate->id);
 
         return redirect()->route('candidates')->with('success', "Candidato excluído com sucesso!");
+    }
+
+
+    public function deleteAllSelected()
+    {
+        if (!$this->request->isAJAX()) {
+
+            return redirect()->back();
+        }
+
+        $idsToDelete = $this->request->getPost('id');
+
+        if (is_array($idsToDelete) && !empty($idsToDelete)) {
+
+            dd(in_array(service('auth')->user()->id, $idsToDelete));
+
+            // We guarantee that the admin id will not be deleted
+            if (!in_array(service('auth')->user()->id, $idsToDelete)) {
+
+                $this->candidateModel->whereIn('id', $idsToDelete)->delete();
+            }
+        }
+
+        session()->setFlashdata('success', 'Registros excluídos com sucesso!');
+
+        return $this->response->setJSON([]);
     }
 }

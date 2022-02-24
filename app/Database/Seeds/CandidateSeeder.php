@@ -17,7 +17,7 @@ class CandidateSeeder extends Seeder
 
             $this->db->transStart();
 
-            $createHowManyCandidates = 50;
+            $createHowManyCandidates = 100;
 
             $totalSteps = $createHowManyCandidates;
             $currStep   = 1;
@@ -51,8 +51,8 @@ class CandidateSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $candidate = new User([
-            'name'      => $faker->unique()->name,
-            'email'     => $faker->unique()->email,
+            'name'      => $faker->unique()->name(),
+            'email'     => $faker->unique()->email(),
             'is_active' => 1,
             'password'  => '123456',
         ]);

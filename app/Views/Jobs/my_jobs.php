@@ -34,13 +34,11 @@
 
                 <div class="card mb-4 py-3 border-left-primary">
                     <div class="card-body">
-                        <div class="alert alert-info">Não há vagas disponíveis no momento</div>
+                        <div class="alert alert-info">Você ainda não se candidatou a nenhuma vaga</div>
                     </div>
                 </div>
 
             </div>
-
-
 
         <?php else : ?>
 
