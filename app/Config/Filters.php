@@ -29,6 +29,10 @@ class Filters extends BaseConfig
             \App\Filters\AdminFilter::class
         ],
         'guest' => \App\Filters\GuestFilter::class,
+        'candidate'  =>    [
+            \App\Filters\AuthFilter::class,
+            \App\Filters\CandidateFilter::class,
+        ],
     ];
 
     /**

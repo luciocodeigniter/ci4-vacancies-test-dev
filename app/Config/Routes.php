@@ -31,7 +31,7 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
+$routes->get('/', 'Home::index', ['filter' => 'candidate', 'as' => 'home']);
 
 
 // Login
@@ -83,6 +83,15 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
     $routes->get('edit/(:num)', 'Candidates::edit/$1', ['as' => 'candidates.edit']);
     $routes->put('update/(:num)', 'Candidates::update/$1', ['as' => 'candidates.update']);
     $routes->delete('delete/(:num)', 'Candidates::delete/$1', ['as' => 'candidates.delete']);
+});
+
+
+// Jobs - applications
+$routes->group('jobs', ['filter' => 'auth'], function ($routes) {
+    $routes->get('/', 'Jobs::index', ['as' => 'jobs']);
+    $routes->get('my', 'Jobs::myJobs', ['as' => 'jobs.my']);
+    $routes->put('apply/(:num)', 'Jobs::apply/$1', ['as' => 'jobs.apply']);
+    $routes->delete('givup/(:num)', 'Jobs::givUp/$1', ['as' => 'jobs.givup']);
 });
 
 

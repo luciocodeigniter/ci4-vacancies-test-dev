@@ -41,27 +41,54 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url('/'); ?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            <?php if (auth()->user->is_admin) : ?>
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('/'); ?>">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+
+            <?php endif; ?>
+
+
 
 
             <!-- Divider -->
             <hr class="sidebar-divider mb-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo route_to('candidates'); ?>">
-                    <i class="fas fa-users"></i>
-                    <span>Gerenciar candidatos</span></a>
+                <a class="nav-link" href="<?php echo route_to('jobs'); ?>">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Veja as vagas</span></a>
+            </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider mb-0">
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo route_to('jobs.my'); ?>">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Minhas candidaturas</span></a>
             </li>
 
 
             <hr class="sidebar-divider mb-0">
 
+
             <?php if (auth()->user->is_admin) : ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo route_to('candidates'); ?>">
+                        <i class="fas fa-users"></i>
+                        <span>Gerenciar candidatos</span></a>
+                </li>
+
+                <hr class="sidebar-divider mb-0">
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo route_to('vacancies'); ?>">
@@ -70,6 +97,7 @@
                 </li>
 
             <?php endif; ?>
+
 
 
             <!-- Divider -->

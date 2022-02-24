@@ -27,6 +27,6 @@ class Vacancy extends Entity
 
     public function isPaused()
     {
-        return $this->is_paused ? 'Pausada para candidaturas' : 'Liberada para candidaturas';
+        return $this->is_paused ? '<span class="text-danger">Pausada para candidaturas</span>' : '<span class="text-primary">Liberada para candidaturas</span>';
     }
 }
