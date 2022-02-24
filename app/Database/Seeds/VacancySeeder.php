@@ -62,6 +62,35 @@ class VacancySeeder extends Seeder
                 'description'   => 'Analista de Marketing Digital 100% remoto',
             ],
 
+            [
+                'title'         => 'Docente de TI e Computação',
+                'type'          => 'clt',
+                'is_paused'     => false,
+                'description'   => 'Docente de TI e Computação 100% remoto',
+            ],
+
+
+            [
+                'title'         => 'Coordenador de TI',
+                'type'          => 'clt',
+                'is_paused'     => false,
+                'description'   => 'Coordenador de TI',
+            ],
+
+            [
+                'title'         => 'Assistente em Informática',
+                'type'          => 'clt',
+                'is_paused'     => false,
+                'description'   => 'Assistente em Informática',
+            ],
+
+            [
+                'title'         => 'Analista de Suporte a Sistemas',
+                'type'          => 'clt',
+                'is_paused'     => false,
+                'description'   => 'Analista de Suporte a Sistemas',
+            ],
+
         ];
     }
 }

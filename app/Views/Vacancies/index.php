@@ -35,6 +35,16 @@
         </div>
         <div class="card-body">
 
+            <div class="row mb-4">
+
+                <div class="col-md-4">
+
+                    <?php echo form_button(['class' => 'btn-delete-all btn btn-danger btn-sm'], 'Excluir selecionados'); ?>
+
+                </div>
+
+            </div>
+
             <?php if (empty($vacancies)) : ?>
 
 
@@ -47,7 +57,8 @@
 
                     <thead>
                         <tr>
-                            <th scope="col">#
+                            <th scope="col">
+                                <?php echo render_checkbox_for_delete(); ?>
                             </th>
                             <th scope="col">Título</th>
                             <th scope="col">Tipo</th>
@@ -61,7 +72,9 @@
                         <?php foreach ($vacancies as $vacancy) : ?>
 
                             <tr>
-                                <th scope="row"><?php echo $vacancy->id; ?></th>
+                                <th scope="row">
+                                    <?php echo render_checkbox_for_delete($vacancy->id); ?>
+                                </th>
                                 <td><?php echo $vacancy->title; ?></td>
                                 <td><?php echo $vacancy->type(); ?></td>
                                 <td><?php echo $vacancy->description; ?></td>
@@ -100,5 +113,12 @@
 
 <!-- Page level custom scripts -->
 <script src="<?php echo site_url('assets/'); ?>js/demo/datatables-demo.js"></script>
+
+<script>
+    const ROUTE_TO_DELETE = '<?php echo route_to('vacancies.delete.all'); ?>';
+    const ROUTE_TO_REDIRECT = '<?php echo route_to('vacancies'); ?>';
+</script>
+
+<?php echo $this->include('Shared/_delete_all'); ?>
 
 <?= $this->endSection() ?>

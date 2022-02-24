@@ -130,4 +130,24 @@ class Vacancies extends BaseController
 
         return redirect()->route('vacancies')->with('success', "Vaga excluída com sucesso!");
     }
+
+
+    public function deleteAllSelected()
+    {
+        if (!$this->request->isAJAX()) {
+
+            return redirect()->back();
+        }
+
+        $idsToDelete = $this->request->getPost('id');
+
+        if (is_array($idsToDelete) && !empty($idsToDelete)) {
+
+            $this->vacancyModel->whereIn('id', $idsToDelete)->delete();
+        }
+
+        session()->setFlashdata('success', 'Registros excluídos com sucesso!');
+
+        return $this->response->setJSON([]);
+    }
 }

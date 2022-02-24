@@ -61,3 +61,58 @@ if (!function_exists('show_type')) {
         };
     }
 }
+
+
+if (!function_exists('render_checkbox_for_delete')) {
+
+    /**
+     * Renderiza um checkbox. 
+     * 
+     * $idToDelete -> Caso informado, será renderizado um checkbox com atributos para deleção de registros.
+     * $classDivCheckbox -> Classe da div que comporta o checkbox
+     *
+     * @param integer|null $idToDelete Caso informado, será renderizado um checkbox com atributos para deleção de registros
+     * @param string $classDivCheckbox Classe da div que comporta o checkbox
+     * @param string $classCheckbox
+     * @param string $classLabel
+     * @return void
+     */
+    function render_checkbox_for_delete(
+        int $idToDelete = null,
+        string $classDivCheckbox = 'custom-control custom-checkbox',
+        string $classCheckbox = 'custom-control-input',
+        string $classLabel = 'custom-control-label'
+    ) {
+
+        // Se veio um $idToDelete, então a classe classCheckbox recebe 'check-$idToDelete' + ela mesma
+        $classCheckbox = ($idToDelete ? "checkbox_delete $classCheckbox" : $classCheckbox);
+
+        // Se veio um $idToDelete, então o idCheckbox recebe 'check-$idToDelete', caso contrário 'select_all'
+        $idCheckbox = ($idToDelete ? "check-$idToDelete" : 'select_all');
+
+        $checkboxAttr = [
+            'id'      => $idCheckbox,
+            'data-id' => $idToDelete, // usaremos no script
+            'class'   => $classCheckbox,
+        ];
+
+        // Não veio um $idToDelete?
+        // Então removemos o 'data-id'
+        if (is_null($idToDelete)) {
+            unset($checkboxAttr['data-id']);
+        }
+
+        // Criamos o checkbox
+        $checkbox = form_checkbox($checkboxAttr);
+
+        $labelAttr = [
+            'class' => $classLabel,
+        ];
+
+        // Criamos o label
+        $label = form_label('', $idCheckbox, $labelAttr);
+
+        // Retornamos a div montada
+        return "<div class='{$classDivCheckbox}'>{$checkbox}{$label}</div>";
+    }
+}
