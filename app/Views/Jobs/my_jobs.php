@@ -18,14 +18,22 @@
 <?php echo $this->section('content') ?>
 
 
+
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3"><?php echo $title; ?></h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        </div>
+    </div>
 
-    <!-- Content Row -->
-    <div class="row">
-
+    <!-- Example row of columns -->
+    <div class="row justify-content-center">
 
         <?php if (empty($jobs)) : ?>
 
@@ -48,26 +56,19 @@
 
             <?php foreach ($jobs as $job) : ?>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><?php echo $job->type == 'pj' ? 'Contrato - Pessoa Jurídica' : ($job->type == 'clt' ? 'CLT - Pessoa Física' : 'Contrato - Freelancer'); ?></div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $job->title; ?></div>
-                                    <p class="card-text">
-                                        <?php echo $job->description; ?>
-                                    </p>
-                                    <p class="card-text">
-                                        Data candidatura: <?php echo $job->applied_at; ?>
-                                    </p>
-                                    <hr>
-                                    <?php echo render_form_to_apply_givup($job); ?>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-3 shadow p-5 mb-2 m-1">
+                    <h2><?php echo $job->title; ?></h2>
+                    <p>
+                        <?php echo $job->type == 'pj' ? 'Contrato - Pessoa Jurídica' : ($job->type == 'clt' ? 'CLT - Pessoa Física' : 'Contrato - Freelancer'); ?>
+                    </p>
+                    <p>
+                        <?php echo $job->description; ?>
+                    </p>
+
+                    <p>
+                        <?php echo render_form_to_apply_givup($job); ?>
+                    </p>
                 </div>
 
             <?php endforeach; ?>
@@ -76,7 +77,6 @@
         <?php endif; ?>
 
     </div>
-
 
 </div>
 <!-- /.container-fluid -->
