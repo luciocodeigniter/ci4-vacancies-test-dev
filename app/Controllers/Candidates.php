@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UserModel as CandidateModel;
 use CodeIgniter\Config\Factories;
 use App\Entities\User as Candidate;
+use Exception;
 
 class Candidates extends BaseController
 {
@@ -147,9 +148,8 @@ class Candidates extends BaseController
 
         $idsToDelete = $this->request->getPost('id');
 
-        if (is_array($idsToDelete) && !empty($idsToDelete)) {
 
-            dd(in_array(service('auth')->user()->id, $idsToDelete));
+        if (is_array($idsToDelete) && !empty($idsToDelete)) {
 
             // We guarantee that the admin id will not be deleted
             if (!in_array(service('auth')->user()->id, $idsToDelete)) {

@@ -33,6 +33,7 @@ class Filters extends BaseConfig
             \App\Filters\AuthFilter::class,
             \App\Filters\CandidateFilter::class,
         ],
+        'throttle' => \App\Filters\ThrottleFilter::class,
     ];
 
     /**
@@ -43,9 +44,9 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'honeypot',
+            'csrf',
+            'invalidchars',
         ],
         'after' => [
             'toolbar',
@@ -63,7 +64,9 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $methods = [];
+    public $methods = [
+        'post' => ['csrf', 'throttle']
+    ];
 
     /**
      * List of filter aliases that should run on any
