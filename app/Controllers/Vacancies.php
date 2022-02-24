@@ -21,8 +21,7 @@ class Vacancies extends BaseController
 
         $data = [
             'title' => 'Listando as Vagas',
-            'vacancies' => $this->vacancyModel->getAll($request),
-            'pager'     => $this->vacancyModel->pager
+            'vacancies' => $this->vacancyModel->findAll(),
         ];
 
         return view('Vacancies/index', $data);

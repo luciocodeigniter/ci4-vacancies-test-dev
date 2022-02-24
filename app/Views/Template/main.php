@@ -18,7 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo site_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 
-    <?php echo $this->renderSection('title'); ?>
+    <?php echo $this->renderSection('styles'); ?>
 
 </head>
 

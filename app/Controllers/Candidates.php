@@ -16,12 +16,11 @@ class Candidates extends BaseController
 
     public function index()
     {
-        $request = (object) $this->request->getGet();
+
 
         $data = [
             'title'         => 'Listando os candidatos',
-            'candidates'    => $this->candidateModel->getCandidates($request),
-            'pager'         => $this->candidateModel->pager,
+            'candidates'    => $this->candidateModel->getCandidates(),
         ];
 
         return view('Candidates/index', $data);
