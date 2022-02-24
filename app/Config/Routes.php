@@ -95,6 +95,12 @@ $routes->group('jobs', ['filter' => 'auth'], function ($routes) {
 });
 
 
+// API Routes
+$routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function ($routes) {
+    $routes->post('login', 'Login::index');
+});
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
