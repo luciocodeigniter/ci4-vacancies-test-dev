@@ -22,8 +22,6 @@ class Jobs extends BaseController
     public function index()
     {
 
-        helper('jobs');
-
         $data = [
             'title' => 'Conheça as nossas vagas',
             'jobs'  => $this->vacancyModel->getAllForApplications()
@@ -84,8 +82,6 @@ class Jobs extends BaseController
 
     public function myJobs()
     {
-
-        helper('jobs');
 
         $data = [
             'title' => 'Minhas candidaturas',

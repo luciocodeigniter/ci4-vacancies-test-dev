@@ -35,30 +35,6 @@ class VacancyModel extends Model
         ],
     ];
 
-
-    public function getAll(object $request)
-    {
-
-        if (!isset($request->order)) {
-
-            return $this->paginate(20);
-        }
-
-        $vacancies = match ($request->order) {
-
-            'id' => $this->orderBy('id', 'DESC')->paginate(20),
-            'title' => $this->orderBy('title', 'ASC')->paginate(20),
-            'type' => $this->orderBy('type', 'ASC')->paginate(20),
-            'is_paused' => $this->orderBy('is_paused', 'ASC')->paginate(20),
-            'description' => $this->orderBy('description', 'ASC')->paginate(20),
-            default => throw new \Exception('Unsupported'),
-        };
-
-
-        return $vacancies;
-    }
-
-
     public function getAllForApplications()
     {
 

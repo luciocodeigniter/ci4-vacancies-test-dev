@@ -18,7 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo site_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 
-    <?php echo $this->renderSection('title'); ?>
+    <?php echo $this->renderSection('styles'); ?>
 
 </head>
 
@@ -144,9 +144,14 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <a class="nav-link" href="#" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo auth()->user()->name; ?></span>
-                        </a>
+                        <li class="nav-item">
+
+                            <?php echo form_open(route_to('login.destroy')); ?>
+
+                            <?php echo form_submit('', 'Sair', ['class' => 'btn btn-primary btn-sm']) ?>
+
+                            <?php echo form_close(); ?>
+                        </li>
 
                     </ul>
 

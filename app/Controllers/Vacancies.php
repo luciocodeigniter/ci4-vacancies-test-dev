@@ -21,8 +21,7 @@ class Vacancies extends BaseController
 
         $data = [
             'title' => 'Listando as Vagas',
-            'vacancies' => $this->vacancyModel->getAll($request),
-            'pager'     => $this->vacancyModel->pager
+            'vacancies' => $this->vacancyModel->findAll(),
         ];
 
         return view('Vacancies/index', $data);
@@ -130,5 +129,25 @@ class Vacancies extends BaseController
         $this->vacancyModel->delete($vacancy->id);
 
         return redirect()->route('vacancies')->with('success', "Vaga excluída com sucesso!");
+    }
+
+
+    public function deleteAllSelected()
+    {
+        if (!$this->request->isAJAX()) {
+
+            return redirect()->back();
+        }
+
+        $idsToDelete = $this->request->getPost('id');
+
+        if (is_array($idsToDelete) && !empty($idsToDelete)) {
+
+            $this->vacancyModel->whereIn('id', $idsToDelete)->delete();
+        }
+
+        session()->setFlashdata('success', 'Registros excluídos com sucesso!');
+
+        return $this->response->setJSON([]);
     }
 }
