@@ -1,7 +1,5 @@
 <?php
 
-use App\Entities\Vacancy;
-
 if (!function_exists('render_form_to_apply_givup')) {
 
     /**
@@ -10,7 +8,7 @@ if (!function_exists('render_form_to_apply_givup')) {
      * @param Vacancy $job
      * @return string
      */
-    function render_form_to_apply_givup(Vacancy $job)
+    function render_form_to_apply_givup(object $job)
     {
 
         // Get the logged user

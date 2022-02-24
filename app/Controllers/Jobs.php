@@ -81,4 +81,17 @@ class Jobs extends BaseController
 
         return redirect()->back()->with('success', "Desistência realizada com sucesso!");
     }
+
+    public function myJobs()
+    {
+
+        helper('jobs');
+
+        $data = [
+            'title' => 'Minhas candidaturas',
+            'jobs'  => $this->applicationModel->applications()
+        ];
+
+        return view('Jobs/my_jobs', $data);
+    }
 }

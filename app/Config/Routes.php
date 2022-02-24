@@ -89,6 +89,7 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
 // Jobs - applications
 $routes->group('jobs', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Jobs::index', ['as' => 'jobs']);
+    $routes->get('my', 'Jobs::myJobs', ['as' => 'jobs.my']);
     $routes->put('apply/(:num)', 'Jobs::apply/$1', ['as' => 'jobs.apply']);
     $routes->delete('givup/(:num)', 'Jobs::givUp/$1', ['as' => 'jobs.givup']);
 });

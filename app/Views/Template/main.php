@@ -59,6 +59,17 @@
             </li>
 
 
+            <!-- Divider -->
+            <hr class="sidebar-divider mb-0">
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo route_to('jobs.my'); ?>">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Minhas candidaturas</span></a>
+            </li>
+
+
             <hr class="sidebar-divider mb-0">
 
 
@@ -72,10 +83,6 @@
 
                 <hr class="sidebar-divider mb-0">
 
-            <?php endif; ?>
-
-
-            <?php if (auth()->user->is_admin) : ?>
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo route_to('vacancies'); ?>">
@@ -84,6 +91,7 @@
                 </li>
 
             <?php endif; ?>
+
 
 
             <!-- Divider -->

@@ -24,7 +24,15 @@ class ApplicationModel extends Model
     {
         $userID = $candidateID ?? service('auth')->user()->id;
 
+        $tableFields = [
+            'vacancies.*',
+            'applications.user_id',
+            'applications.vacancy_id',
+            'applications.created_at AS applied_at',
+        ];
+
         return $this
+            ->select($tableFields)
             ->join('vacancies', 'vacancies.id = applications.vacancy_id')
             ->where('applications.user_id', $userID)
             ->orderBy('applications.created_at', 'DESC')
