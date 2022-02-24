@@ -29,7 +29,7 @@ if (!function_exists('render_form_to_apply_givup')) {
 
 
         $formAttr = [
-            'onClick'   => "return confirm('Tem certeza que deseja desistar dessa vaga?');",
+            'onClick'   => "return confirm('Tem certeza que deseja desistir dessa vaga?');",
         ];
 
         // Confirmation will be displayed only only if it's quitting
@@ -39,5 +39,25 @@ if (!function_exists('render_form_to_apply_givup')) {
         }
 
         return form_open($routeTo, $formAttr, $hiddens) . form_submit($buttomAttr) . form_close();
+    }
+}
+
+
+if (!function_exists('show_type')) {
+
+    /**
+     * Display the type of contract job. Eg.: Contrato - Pessoa Jurídica, CLT - Pessoa Física, etc
+     *
+     * @param string $type
+     * @return void
+     */
+    function show_type(string $type)
+    {
+        return match ($type) {
+            'pj'        => 'Contrato - Pessoa Jurídica',
+            'clt'       => 'CLT - Pessoa Física',
+            'fr'        => 'Contrato - Freelancer',
+            default     => 'Tipo desconhecido'
+        };
     }
 }
