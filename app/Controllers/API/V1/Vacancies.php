@@ -133,6 +133,20 @@ class Vacancies extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $vacancy = $this->model->asObject()->find($id);
+
+        if (is_null($vacancy)) {
+
+            return $this->failNotFound("Vacancy {$id} not found");
+        }
+
+        $this->model->delete($vacancy->id);
+
+        $response = [
+            'status'        => 200,
+            'message'       => "Vacancy deleted sucessful!",
+        ];
+
+        return $this->respondDeleted($response);
     }
 }
