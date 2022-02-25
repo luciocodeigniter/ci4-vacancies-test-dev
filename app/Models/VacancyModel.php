@@ -31,7 +31,7 @@ class VacancyModel extends Model
             'is_unique' => 'Essa vaga já existe. Por favor escolha outra.',
         ],
         'type'        => [
-            'in_list' => 'O tipo da vaga deve ser: Freelancer ou Pessoa Física ou Pessoa Jurídica',
+            'in_list' => 'O tipo da vaga deve ser: FR (Freelancer) ou CLT (Pessoa Física) ou PJ (Pessoa Jurídica)',
         ],
     ];
 

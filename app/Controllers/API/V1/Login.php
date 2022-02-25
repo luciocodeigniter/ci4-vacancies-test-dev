@@ -6,12 +6,10 @@ use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
 use CodeIgniter\Config\Factories;
-use \Firebase\JWT\JWT;
-
+use Firebase\JWT\JWT;
 
 class Login extends BaseController
 {
-
     use ResponseTrait;
 
     public function __construct()
@@ -63,6 +61,7 @@ class Login extends BaseController
             "exp" => $exp, // Expiration time of token
             "email" => $email,
         );
+
 
         $token = JWT::encode($payload, $key, 'HS256');
 

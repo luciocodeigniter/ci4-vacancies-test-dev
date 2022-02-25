@@ -12,6 +12,14 @@ class Vacancy extends Entity
         'is_paused'   => 'boolean',
     ];
 
+
+    public function setType(string $type)
+    {
+        $this->attributes['type'] = strtolower($type);
+
+        return $this;
+    }
+
     public function type()
     {
 

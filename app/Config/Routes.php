@@ -97,7 +97,12 @@ $routes->group('jobs', ['filter' => 'auth'], function ($routes) {
 
 // API Routes
 $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function ($routes) {
+
+    // Login
     $routes->post('login', 'Login::index');
+
+    // Vacancies
+    $routes->resource('vacancies', ['filter' => 'auth_admin', 'except' => 'new,edit']);
 });
 
 
