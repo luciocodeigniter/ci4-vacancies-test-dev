@@ -102,7 +102,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function
     $routes->post('login', 'Login::index');
 
     // Vacancies
-    $routes->resource('vacancies');
+    $routes->resource('vacancies', ['filter' => 'auth_api']);
 });
 
 
