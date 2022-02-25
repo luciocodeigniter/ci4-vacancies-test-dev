@@ -20,7 +20,7 @@ class Vacancies extends ResourceController
     public function index()
     {
         $response = [
-            'code'      => 200,
+            'status'      => 200,
             'message'   => 'Listing vacancies',
             'vacancies' => $this->model->asArray()->findAll()
         ];
@@ -35,7 +35,20 @@ class Vacancies extends ResourceController
      */
     public function show($id = null)
     {
-        //
+        $vacancy = $this->model->asObject()->find($id);
+
+        if (is_null($vacancy)) {
+
+            return $this->failNotFound("Vacancy {$id} not found");
+        }
+
+        $response = [
+            'status'        => 200,
+            'message'       => "Show vacancy $vacancy->title",
+            'vacancy'       => $vacancy
+        ];
+
+        return $this->respond($response);
     }
 
     /**
