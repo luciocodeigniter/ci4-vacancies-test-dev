@@ -51,15 +51,6 @@ class Vacancies extends ResourceController
         return $this->respond($response);
     }
 
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
-    public function new()
-    {
-        //
-    }
 
     /**
      * Create a new resource object, from "posted" parameters
@@ -71,15 +62,7 @@ class Vacancies extends ResourceController
         //
     }
 
-    /**
-     * Return the editable properties of a resource object
-     *
-     * @return mixed
-     */
-    public function edit($id = null)
-    {
-        //
-    }
+
 
     /**
      * Add or update a model resource, from "posted" properties
@@ -88,7 +71,37 @@ class Vacancies extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $vacancy = $this->model->find($id);
+
+        if (is_null($vacancy)) {
+
+            return $this->failNotFound("Vacancy {$id} not found");
+        }
+
+
+        $vacancy->fill($this->request->getRawInput());
+
+        if (!$vacancy->hasChanged()) {
+
+            $response = [
+                'status'        => 200,
+                'message'       => "There is no data to update",
+            ];
+
+            return $this->respond($response);
+        }
+
+        if (!$this->model->save($vacancy)) {
+
+            return $this->failValidationErrors($this->model->errors());
+        }
+
+        $response = [
+            'status'        => 200,
+            'message'       => "Vacancy updated sucessful!",
+        ];
+
+        return $this->respond($response);
     }
 
     /**
@@ -99,5 +112,24 @@ class Vacancies extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+
+    private static function rules(int $id = null)
+    {
+        return [
+            'title' => "required|min_length[2]|max_length[120]|is_unique[vacancies.title,id,{$id}]",
+            'type' => 'in_list[fr,clt,pj]',
+            'description' => 'required|max_length[500]',
+        ];
+    }
+
+    private static function messages()
+    {
+        return [
+            'title'        => [
+                'is_unique' => 'Essa vaga já existe. Por favor escolha outra.',
+            ],
+        ];
     }
 }
