@@ -38,6 +38,10 @@ class Filters extends BaseConfig
         // API
         'auth_api' => \App\Filters\API\AuthFilter::class,
 
+        'auth_admin' => [
+            \App\Filters\API\AdminFilter::class,
+        ],
+
     ];
 
     /**
