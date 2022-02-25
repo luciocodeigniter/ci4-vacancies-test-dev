@@ -2,6 +2,7 @@
 
 namespace App\Controllers\API\V1;
 
+use App\Entities\Vacancy;
 use App\Models\VacancyModel;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\RESTful\ResourceController;
@@ -59,7 +60,29 @@ class Vacancies extends ResourceController
      */
     public function create()
     {
-        //
+        if (empty($this->request->getPost())) {
+
+            $response = [
+                'status'        => 400,
+                'message'       => "No data was send",
+            ];
+
+            return $this->fail($response);
+        }
+
+        $vacancy = new Vacancy($this->request->getPost());
+
+        if (!$this->model->save($vacancy)) {
+
+            return $this->failValidationErrors($this->model->errors());
+        }
+
+        $response = [
+            'status'        => 201,
+            'message'       => "Vacancy created sucessful!",
+        ];
+
+        return $this->respondCreated($response);
     }
 
 
@@ -77,7 +100,6 @@ class Vacancies extends ResourceController
 
             return $this->failNotFound("Vacancy {$id} not found");
         }
-
 
         $vacancy->fill($this->request->getRawInput());
 
@@ -112,24 +134,5 @@ class Vacancies extends ResourceController
     public function delete($id = null)
     {
         //
-    }
-
-
-    private static function rules(int $id = null)
-    {
-        return [
-            'title' => "required|min_length[2]|max_length[120]|is_unique[vacancies.title,id,{$id}]",
-            'type' => 'in_list[fr,clt,pj]',
-            'description' => 'required|max_length[500]',
-        ];
-    }
-
-    private static function messages()
-    {
-        return [
-            'title'        => [
-                'is_unique' => 'Essa vaga já existe. Por favor escolha outra.',
-            ],
-        ];
     }
 }
