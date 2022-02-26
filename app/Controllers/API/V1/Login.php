@@ -27,44 +27,16 @@ class Login extends BaseController
             return $this->failValidationErrors($this->validator->getErrors());
         }
 
-        $user = $this->userModel->getByCriteria(['email' => $email]);
-
-        if (is_null($user)) {
-
-            return $this->fail('Check your login credentials and try again');
-        }
-
-        if (!$user->validatePassword($password)) {
+        if (!$accessToken = service('auth')->attemptCreateJWT($email, $password)) {
 
             return $this->fail('Check your login credentials and try again');
         }
 
         $response = [
             'message'       => 'Login Succesful',
-            'access_token'  => $this->generateJWT($user->email)
+            'access_token'  => $accessToken
         ];
 
         return $this->respond($response, 200);
-    }
-
-    private function generateJWT(string $email)
-    {
-        $key = getenv('JWT_SECRET');
-        $iat = time(); // current timestamp value
-        $exp = $iat + 3600;
-
-        $payload = array(
-            "iss" => "Issuer of the JWT",
-            "aud" => "Audience that the JWT",
-            "sub" => "Subject of the JWT",
-            "iat" => $iat, //Time the JWT issued at
-            "exp" => $exp, // Expiration time of token
-            "email" => $email,
-        );
-
-
-        $token = JWT::encode($payload, $key, 'HS256');
-
-        return $token;
     }
 }
