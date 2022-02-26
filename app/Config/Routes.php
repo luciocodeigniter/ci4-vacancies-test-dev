@@ -114,6 +114,14 @@ $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function
 
     // Register
     $routes->resource('register', ['only' => 'create']);
+
+    // Jobs - applications
+    $routes->group('jobs', ['namespace' => 'App\Controllers\API\V1'], function ($routes) {
+        $routes->get('/', 'Jobs::index',);
+        $routes->get('my', 'Jobs::myJobs',);
+        $routes->put('apply/(:num)', 'Jobs::apply/$1',);
+        $routes->delete('givup/(:num)', 'Jobs::givUp/$1',);
+    });
 });
 
 
