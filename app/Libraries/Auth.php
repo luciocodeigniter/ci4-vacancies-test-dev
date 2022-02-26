@@ -224,7 +224,12 @@ class Auth
         try {
             $decoded = JWT::decode($token, new Key($key, 'HS256'));
 
-            return $this->getUserFromJWT($decoded->email);
+            if (!$user = $this->getUserFromJWT($decoded->email)) {
+
+                return false;
+            }
+
+            return $user;
         } catch (\Exception $ex) {
 
             return false;
@@ -255,6 +260,12 @@ class Auth
     private function getUserFromJWT(string $email)
     {
         $user = $this->userModel->getByCriteria(['email' => $email]);
+
+        // Was found or still is active?
+        if (is_null($user) || !$user->is_active) {
+
+            return null;
+        }
 
         // The user is admin?
         $user->is_admin = $this->isAdmin($user->id);
