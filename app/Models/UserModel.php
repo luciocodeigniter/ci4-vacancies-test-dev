@@ -96,7 +96,7 @@ class UserModel extends Model
         }
 
         // Activate the user
-        $user->activate();
+        $user->markAsVerified();
 
         return $this->protect(false)->save($user);
     }

@@ -48,7 +48,8 @@ class Login extends BaseController
                 ->withCookies();
         }
 
-        return redirect()->back()->with('danger', 'Verifique suas credenciais e tente novamente')->withInput();
+        return redirect()->back()->with('danger', 'Sua conta não foi encontrada ou ainda não foi verificada')
+            ->withInput();
     }
 
 

@@ -112,6 +112,9 @@ $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function
 
     // Vacancies
     $routes->resource('vacancies', ['filter' => 'auth_admin', 'except' => 'new,edit']);
+
+    // Register
+    $routes->resource('register', ['only' => 'create']);
 });
 
 
