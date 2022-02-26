@@ -2,14 +2,10 @@
 
 namespace App\Filters\API;
 
-use App\Models\UserModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\Config\Factories;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
 
 class VerifiedFilter implements FilterInterface
 {
@@ -20,7 +16,6 @@ class VerifiedFilter implements FilterInterface
     public function __construct()
     {
         $this->response = service('response');
-        $this->userModel = Factories::models(UserModel::class);
     }
 
     /**
