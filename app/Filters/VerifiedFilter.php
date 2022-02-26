@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class GuestFilter implements FilterInterface
+class VerifiedFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,11 +25,11 @@ class GuestFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $auth = service('auth');
+        $user = service('auth')->user();
 
-        if ($auth->isLoggedIn()) {
+        if (is_null($user->email_verified_at)) {
 
-            return redirect()->back();
+            return redirect()->route('verify')->with('info', "$user->name, sua conta ainda não foi verificada!");
         }
     }
 

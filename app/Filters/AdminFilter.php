@@ -25,9 +25,9 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $this->user = service('auth')->user();
+        $user = service('auth')->user();
 
-        if (!$this->user->is_admin) {
+        if (!$user->is_admin) {
 
             return redirect()->back()->with('info', 'Esta área só pode ser acessada por um administrador');
         }

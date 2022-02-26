@@ -50,4 +50,24 @@ class Notify
 
         return true;
     }
+
+    public function resendEmailActivation(string $email, string $token)
+    {
+        $this->service->setFrom('no-reply@vacancies.com', 'Codeigniter 4 - Vacancies - Test - Dev');
+        $this->service->setTo($email);
+        $this->service->setSubject('Ativação de conta');
+
+        $message = view('Verify/activation_email', ['token' => $token]);
+
+        $this->service->setMessage($message);
+
+        if (!$this->service->send()) {
+
+            log_message('error', $this->service->printDebugger());
+
+            return false;
+        }
+
+        return true;
+    }
 }
