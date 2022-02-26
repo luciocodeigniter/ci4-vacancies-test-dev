@@ -12,7 +12,7 @@
     <title>Vacancies - Dev Test | <?php echo $this->renderSection('title'); ?></title>
 
     <!-- Custom fonts for this template-->
-    <link href="<?php echo site_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo site_url('assets/'); ?>libs/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
@@ -41,7 +41,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <?php if (auth()->user->is_admin) : ?>
+            <?php if (auth()->user()->is_admin) : ?>
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
@@ -79,7 +79,7 @@
             <hr class="sidebar-divider mb-0">
 
 
-            <?php if (auth()->user->is_admin) : ?>
+            <?php if (auth()->user()->is_admin) : ?>
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo route_to('candidates'); ?>">
@@ -97,20 +97,6 @@
                 </li>
 
             <?php endif; ?>
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item mb-4">
-
-                <?php echo form_open(route_to('login.destroy')); ?>
-
-                <?php echo form_submit('', 'Logout', ['class' => 'btn btn-primary btn-sm ml-3']) ?>
-
-                <?php echo form_close(); ?>
-            </li>
 
 
 
@@ -146,7 +132,10 @@
 
                         <li class="nav-item">
 
+
                             <?php echo form_open(route_to('login.destroy')); ?>
+
+                            <?php echo auth()->user()->name; ?>
 
                             <?php echo form_submit('', 'Sair', ['class' => 'btn btn-primary btn-sm']) ?>
 
@@ -206,11 +195,11 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo site_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo site_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo site_url('assets/'); ?>libs/jquery/jquery.min.js"></script>
+    <script src="<?php echo site_url('assets/'); ?>libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?php echo site_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo site_url('assets/'); ?>libs/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo site_url('assets/'); ?>js/sb-admin-2.min.js"></script>

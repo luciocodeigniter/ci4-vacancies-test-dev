@@ -17,7 +17,7 @@ class Auth
         $this->user = null;
     }
 
-    public function login(string $email, string $password, bool $rememberMe = false): bool
+    public function attempt(string $email, string $password, bool $rememberMe = false): bool
     {
         // Try get the user
         $user = $this->userModel->getByCriteria(['email' => $email]);
@@ -36,7 +36,7 @@ class Auth
 
 
         // let the user in
-        $this->letTheUserIn($user);
+        $this->login($user);
 
         if ($rememberMe) {
 
@@ -150,13 +150,13 @@ class Auth
         // Still exists and is active?
         if ($user && $user->is_active) {
 
-            $this->letTheUserIn($user);
+            $this->login($user);
 
             return $user;
         }
     }
 
-    private function letTheUserIn(User $user): void
+    public function login(User $user): void
     {
         // Generate a new session ID before log in the user
         session()->regenerate();

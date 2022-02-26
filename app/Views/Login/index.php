@@ -50,9 +50,7 @@
             <div class="text-center">
                 <a class="small" href="<?php echo route_to('password') ?>">Esqueci minha senha!</a>
             </div>
-            <div class="text-center">
-                <a class="small" href="<?php echo route_to('verify'); ?>">Não recebi meu link de ativação!</a>
-            </div>
+
             <div class="text-center">
                 <a class="small" href="<?php echo route_to('register'); ?>">Criar minha conta!</a>
             </div>

@@ -26,6 +26,10 @@ class Filters extends BaseConfig
 
         'auth'  =>  [
             \App\Filters\AuthFilter::class,
+        ],
+
+        'verified'  =>  [
+            \App\Filters\AuthFilter::class,
             \App\Filters\VerifiedFilter::class,
         ],
 
@@ -33,11 +37,15 @@ class Filters extends BaseConfig
             \App\Filters\AuthFilter::class,
             \App\Filters\AdminFilter::class
         ],
+
         'guest' => \App\Filters\GuestFilter::class,
+
         'candidate'  =>    [
             \App\Filters\AuthFilter::class,
             \App\Filters\CandidateFilter::class,
         ],
+
+
         'throttle' => \App\Filters\ThrottleFilter::class,
 
         // API

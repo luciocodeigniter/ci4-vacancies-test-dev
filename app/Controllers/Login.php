@@ -41,14 +41,14 @@ class Login extends BaseController
         $password   = $request->password;
         $rememberMe   = (bool) isset($request->remember_me);
 
-        if ($this->auth->login($email, $password, $rememberMe)) {
+        if ($this->auth->attempt($email, $password, $rememberMe)) {
 
             return redirect()->route('home')
                 ->with('success', 'Login realizado com sucesso')
                 ->withCookies();
         }
 
-        return redirect()->back()->with('danger', 'Sua conta não foi encontrada ou ainda não foi verificada')
+        return redirect()->back()->with('danger', 'Verifique suas credenciais de acesso e tente novamente')
             ->withInput();
     }
 

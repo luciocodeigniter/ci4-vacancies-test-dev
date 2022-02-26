@@ -44,9 +44,8 @@ $routes->group('login', function ($routes) {
 
 // Verify account - Resend Link activation
 $routes->group('verify', function ($routes) {
-    $routes->get('/', 'Verify::index', ['as' => 'verify']);
+    $routes->get('/', 'Verify::index', ['as' => 'verify', 'filter' => 'auth']);
     $routes->put('resend', 'Verify::resend', ['as' => 'verify.resend']);
-    $routes->get('success', 'Verify::success', ['as' => 'verify.resend.success']);
     $routes->get('activate/(:any)', 'Verify::activate/$1', ['as' => 'verify.activate']);
 });
 
@@ -96,7 +95,7 @@ $routes->group('candidates', ['filter' => 'admin'], function ($routes) {
 
 
 // Jobs - applications
-$routes->group('jobs', ['filter' => 'auth'], function ($routes) {
+$routes->group('jobs', ['filter' => 'verified'], function ($routes) {
     $routes->get('/', 'Jobs::index', ['as' => 'jobs']);
     $routes->get('my', 'Jobs::myJobs', ['as' => 'jobs.my']);
     $routes->put('apply/(:num)', 'Jobs::apply/$1', ['as' => 'jobs.apply']);

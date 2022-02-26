@@ -18,10 +18,11 @@ class AdminSeeder extends Seeder
             $userModel = Factories::models(UserModel::class);
 
             $user = new User([
-                'name'      => 'Admin',
-                'is_active' => 1,
-                'email'     => 'admin@admin.com',
-                'password'  => '123456',
+                'name'                  => 'Admin',
+                'is_active'             => 1,
+                'email'                 => 'admin@admin.com',
+                'password'              => '123456',
+                'email_verified_at'     => date('Y-m-d H:i:s'),
             ]);
 
             if (!$userId = $userModel->skipValidation(true)->protect(false)->insert($user)) {

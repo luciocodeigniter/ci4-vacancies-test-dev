@@ -19,6 +19,7 @@ class Notify
         $message = view('Register/activation_email', ['token' => $token]);
 
         $this->service->setMessage($message);
+        $this->service->setMailType('html');
 
         if (!$this->service->send()) {
 
@@ -40,6 +41,7 @@ class Notify
         $message = view('Password/reset_email', ['token' => $token]);
 
         $this->service->setMessage($message);
+        $this->service->setMailType('html');
 
         if (!$this->service->send()) {
 
@@ -60,6 +62,7 @@ class Notify
         $message = view('Verify/activation_email', ['token' => $token]);
 
         $this->service->setMessage($message);
+        $this->service->setMailType('html');
 
         if (!$this->service->send()) {
 

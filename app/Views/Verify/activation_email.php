@@ -3,5 +3,5 @@
 <p>Por favor clique no link abaixo para a tivar a sua conta</p>
 
 <p>
-    <a href="<?php echo route_to("verify.activate", $token); ?>">Ativar minha conta</a>
+    <a href="<?php echo site_url("verify/activate/$token"); ?>">Ativar minha conta</a>
 </p>

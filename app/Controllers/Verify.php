@@ -36,16 +36,7 @@ class Verify extends BaseController
         // Resend e-mail activation
         Events::trigger('notity_resend_activation_email', $this->user->email, $this->user->token);
 
-        return redirect()->route('verify.resend.success')->with('success', "Enviamos para o seu email {$this->user->email} o link para que você possa ativar a sua conta.");
-    }
-
-    public function success()
-    {
-        $data = [
-            'title' => 'Reenviamos o e-mail de ativação da conta',
-        ];
-
-        return view('Verify/success', $data);
+        return redirect()->back()->with('success', "Enviamos para o seu email {$this->user->email} o link para que você possa ativar a sua conta.");
     }
 
     public function activate(string $token = null)

@@ -55,6 +55,7 @@ class CandidateSeeder extends Seeder
             'email'     => $faker->unique()->email(),
             'is_active' => 1,
             'password'  => '123456',
+            'email_verified_at'     => date('Y-m-d H:i:s'),
         ]);
 
         return $candidate;

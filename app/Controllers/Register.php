@@ -18,6 +18,7 @@ class Register extends BaseController
 
     public function index()
     {
+
         $data = ['title' => 'Criar conta'];
 
         return view('Register/index', $data);
@@ -26,37 +27,23 @@ class Register extends BaseController
 
     public function create()
     {
-        $user = new User([
-            'name'                      => $this->request->getPost('name'),
-            'email'                     => $this->request->getPost('email'),
-            'password'                  => $this->request->getPost('password'),
-            'password_confirmation'     => $this->request->getPost('password_confirmation'),
-        ]);
+        $rules = $this->userModel->getValidationRules();
 
-        // Initiate the activation
-        $user->startActivation();
-
-        if (!$this->userModel->insert($user)) {
+        if (!$this->validate($rules)) {
 
             return redirect()->back()
                 ->with('danger', 'Verifique os erros e tente novamente')
-                ->with('errors_model', $this->userModel->errors())
+                ->with('errors_model', $this->validator->getErrors())
                 ->withInput();
         }
 
-        // Since the user was created, now we can send email activation
-        Events::trigger('notity_activation_email', $user->email, $user->token);
+        // Create the user
+        $user = self::createUser($this->request);
 
+        // Let the user in
+        service('auth')->login($user);
 
-        return redirect()->route('register.success')->with('success', "Conta criada com sucesso! <br>Enviamos para o seu email {$user->email} o link para que você possa ativar a sua conta.");
-    }
-
-
-    public function success()
-    {
-        $data = ['title' => 'Enviamos para o seu e-mail o link de ativação da conta'];
-
-        return view('Register/success', $data);
+        return redirect()->route('home')->withCookies();
     }
 
 
@@ -68,5 +55,35 @@ class Register extends BaseController
         }
 
         return redirect()->route('login')->with('success', 'Sua conta foi ativada com sucesso');
+    }
+
+    private function createUser($request)
+    {
+
+        $user = new User([
+            'name'                      => $request->getPost('name'),
+            'email'                     => $request->getPost('email'),
+            'password'                  => $request->getPost('password'),
+            'password_confirmation'     => $request->getPost('password_confirmation'),
+            'is_active'                 => true
+        ]);
+
+        // Initiate the activation
+        $user->startActivation();
+
+        // Get the generated token
+        $token = $user->token;
+
+        // Unset de the generated token before insert
+        unset($user->token);
+
+        $id = $this->userModel->protect(false)->insert($user);
+
+        $user = $this->userModel->getByCriteria(['id' => $id]);
+
+        // Since the user was created, now we can send email activation
+        Events::trigger('notity_activation_email', $user->email, $token);
+
+        return $user;
     }
 }
