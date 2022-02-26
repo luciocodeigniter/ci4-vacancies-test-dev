@@ -40,53 +40,23 @@ class VerifiedFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $key = getenv('JWT_SECRET');
-        $header = $request->getHeader("Authorization");
-        $token = null;
 
-
-        // extract the token from the header
-        if (!empty($header)) {
-            if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
-                $token = $matches[1];
-            }
-        }
-
-
-        // check if token is null or empty
-        if (is_null($token) || empty($token)) {
+        if (!$user = service('auth')->attemptValidateJWT($request)) {
 
             return $this->failUnauthorized('You are not logged in');
         }
 
-        try {
 
-
-            $decoded = JWT::decode($token, new Key($key, 'HS256'));
-
-            // Can we decode?
-            if (!$decoded) {
-
-                return $this->failUnauthorized('You are not logged in');
-            }
-
-            // Get the user
-            $user = $this->userModel->getByCriteria(['email' => $decoded->email]);
-
-            // We found?
-            if (is_null($user)) {
-
-                return $this->failUnauthorized('You are not logged in');
-            }
-
-            // Alread verified?
-            if (is_null($user->email_verified_at)) {
-
-                return $this->failUnauthorized('Your account has not yet been verified');
-            }
-        } catch (\Exception $ex) {
+        // We found?
+        if (is_null($user)) {
 
             return $this->failUnauthorized('You are not logged in');
+        }
+
+        // Alread verified?
+        if (is_null($user->email_verified_at)) {
+
+            return $this->failUnauthorized("{$user->name}, your account has not yet been verified");
         }
     }
 

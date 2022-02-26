@@ -224,7 +224,7 @@ class Auth
         try {
             $decoded = JWT::decode($token, new Key($key, 'HS256'));
 
-            return true;
+            return $this->getUserFromJWT($decoded->email);
         } catch (\Exception $ex) {
 
             return false;
@@ -252,7 +252,7 @@ class Auth
         return $token;
     }
 
-    public function userFromJWT(string $email)
+    private function getUserFromJWT(string $email)
     {
         $user = $this->userModel->getByCriteria(['email' => $email]);
 
