@@ -42,6 +42,15 @@ $routes->group('login', function ($routes) {
 });
 
 
+// Verify account - Resend Link activation
+$routes->group('verify', function ($routes) {
+    $routes->get('/', 'Verify::index', ['as' => 'verify']);
+    $routes->put('resend', 'Verify::resend', ['as' => 'verify.resend']);
+    $routes->get('success', 'Verify::success', ['as' => 'verify.resend.success']);
+    $routes->get('activate/(:any)', 'Verify::activate/$1', ['as' => 'verify.activate']);
+});
+
+
 // Register
 $routes->group('register', function ($routes) {
     $routes->get('/', 'Register::index', ['as' => 'register', 'filter' => 'guest']);

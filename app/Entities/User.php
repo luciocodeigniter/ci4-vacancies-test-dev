@@ -32,6 +32,7 @@ class User extends Entity
     {
         $this->is_active = true;
         $this->activation_hash = null;
+        $this->email_verified_at = date('Y-m-d H:i:s');
     }
 
     public function startPasswordReset()

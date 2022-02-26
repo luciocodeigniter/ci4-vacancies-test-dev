@@ -51,13 +51,29 @@ Events::on('pre_system', static function () {
     }
 
 
+    /**
+     * Send e-mail with link to activate account
+     */
     Events::on('notity_activation_email', function ($email, $token) {
 
         Factories::class(Notify::class)->sendEmailActivation($email, $token);
     });
 
+
+    /**
+     * Send e-mail with link to password recovery
+     */
     Events::on('send_recovery_email', function ($email, $token) {
 
         Factories::class(Notify::class)->sendEmailPasswordRecovery($email, $token);
+    });
+
+
+    /**
+     * Resend e-mail with link to activate account
+     */
+    Events::on('notity_resend_activation_email', function ($email, $token) {
+
+        Factories::class(Notify::class)->resendEmailActivation($email, $token);
     });
 });

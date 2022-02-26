@@ -13,7 +13,7 @@ class UserModel extends Model
     protected $table            = 'users';
     protected $returnType       = User::class;
     protected $allowedFields    = [
-        'name', 'email', 'activation_hash', 'password', 'reset_hash', 'reset_expire_at'
+        'name', 'email', 'activation_hash', 'password', 'reset_hash', 'reset_expire_at', 'email_verified_at'
     ];
 
 
@@ -80,6 +80,7 @@ class UserModel extends Model
 
     public function activateByToken(string $token): bool
     {
+
         $token = new Token($token);
 
         // Generate de hash from token

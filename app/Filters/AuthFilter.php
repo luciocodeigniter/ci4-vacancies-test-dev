@@ -13,9 +13,9 @@ class AuthFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
-        $this->auth = service('auth');
+        $auth = service('auth');
 
-        if (!$this->auth->isLoggedIn()) {
+        if (!$auth->isLoggedIn()) {
 
             return redirect()->route('login')->with('info', 'Realize o login primeiramente');
         }
