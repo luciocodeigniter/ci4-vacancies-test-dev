@@ -59,4 +59,9 @@ class User extends Entity
     {
         return $this->is_active ? 'Acesso Liberado' : 'Acesso Bloqueado';
     }
+
+    public function verified()
+    {
+        return $this->email_verified_at ? 'Conta verificada' : 'Conta não verificada';
+    }
 }

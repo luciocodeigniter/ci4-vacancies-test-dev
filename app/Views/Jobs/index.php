@@ -42,9 +42,7 @@
 
                 <div class="card mb-4 py-3 border-left-primary">
                     <div class="card-body">
-                        <div class="alert alert-info">Você não possui candidaturas no momento</div>
-
-                        <?php echo anchor(route_to('jobs'), 'Ver vagas disponíveis', ['class' => 'btn btn-primary btn-sm']) ?>
+                        <div class="alert alert-info">Não há vagas disponíveis no momento</div>
                     </div>
                 </div>
 
@@ -59,7 +57,7 @@
 
                 <div class="col-md-3 shadow bg-white p-5 mb-2 m-1">
 
-                    <div class="mb-2 float-right">
+                    <div class="mb-2">
                         <?php echo render_form_to_apply_givup($job); ?>
                     </div>
 

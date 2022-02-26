@@ -51,11 +51,11 @@ class CandidateSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $candidate = new User([
-            'name'      => $faker->unique()->name(),
-            'email'     => $faker->unique()->email(),
-            'is_active' => 1,
-            'password'  => '123456',
-            'email_verified_at'     => date('Y-m-d H:i:s'),
+            'name'              => $faker->unique()->name(),
+            'email'             => $faker->unique()->email(),
+            'is_active'         => 1,
+            'password'          => '123456',
+            'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
 
         return $candidate;
