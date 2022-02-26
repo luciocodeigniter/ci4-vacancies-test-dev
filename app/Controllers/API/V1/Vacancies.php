@@ -4,7 +4,6 @@ namespace App\Controllers\API\V1;
 
 use App\Entities\Vacancy;
 use App\Models\VacancyModel;
-use CodeIgniter\Config\Factories;
 use CodeIgniter\RESTful\ResourceController;
 
 class Vacancies extends ResourceController

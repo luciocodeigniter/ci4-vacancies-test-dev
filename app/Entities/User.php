@@ -28,9 +28,8 @@ class User extends Entity
         $this->activation_hash = $token->getHash();
     }
 
-    public function activate()
+    public function markAsVerified()
     {
-        $this->is_active = true;
         $this->activation_hash = null;
         $this->email_verified_at = date('Y-m-d H:i:s');
     }
