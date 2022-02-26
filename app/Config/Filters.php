@@ -49,11 +49,8 @@ class Filters extends BaseConfig
         'throttle' => \App\Filters\ThrottleFilter::class,
 
         // API
-        'auth_api' => \App\Filters\API\AuthFilter::class,
-
-        'auth_admin' => [
-            \App\Filters\API\AdminFilter::class,
-        ],
+        'api_auth'      => \App\Filters\API\AuthFilter::class,
+        'api_verified'  => \App\Filters\API\VerifiedFilter::class,
 
     ];
 
