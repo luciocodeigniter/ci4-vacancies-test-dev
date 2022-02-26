@@ -1,0 +1,50 @@
+#--------------------------------------------------------------------
+# ENVIRONMENT
+#--------------------------------------------------------------------
+
+CI_ENVIRONMENT = development
+
+#--------------------------------------------------------------------
+# APP
+#--------------------------------------------------------------------
+
+app.baseURL = 'http://vacancies-test-dev.test/'
+app.indexPage = ''
+
+#--------------------------------------------------------------------
+# DATABASE
+#--------------------------------------------------------------------
+
+database.default.hostname = localhost
+database.default.database = vacancies-test-dev
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+
+
+
+# --------------------------------------------------------------------
+# EMAIL
+# --------------------------------------------------------------------
+
+email.fromEmail='no-reply@codeigniter.com'
+email.fromName='CodeIgniter 4 - Vacancies - test - dev'
+email.protocol='smtp'
+email.SMTPHost='smtp.mailtrap.io'
+email.SMTPUser='67936ba10cad94' // required....
+email.SMTPPass='0f14eb041e080b' // required
+email.SMTPPort=2525
+email.SMTPCrypto=''
+
+#--------------------------------------------------------------------
+# Chave criada para compor o token gerado 
+# e enviado para o usuário na criação da conta
+#--------------------------------------------------------------------
+HASH_SECRET_KEY_ACCOUNT_ACTIVATION = 'cLLMrs1nLiGYIDXy9IJ1bjjFfftzh5cp'
+
+
+#--------------------------------------------------------------------
+# JWT
+#--------------------------------------------------------------------
+JWT_SECRET = 'P3jo9o6IWJeoNdmGXwMV63meBDupRiR6'
