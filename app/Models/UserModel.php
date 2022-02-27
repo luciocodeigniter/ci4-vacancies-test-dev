@@ -132,23 +132,46 @@ class UserModel extends Model
     public function getCandidates()
     {
 
+        $tableFields = [
+            'id',
+            'name',
+            'email',
+            'is_active',
+            'created_at',
+            'updated_at',
+            'email_verified_at',
+        ];
+
         $usersId = $this->db->table('users_admin')->get()->getResult();
         $usersId = array_column($usersId, 'user_id');
 
-        return $this->whereNotIn('id', $usersId)->findAll();
+        return $this->select($tableFields)->whereNotIn('id', $usersId)->findAll();
     }
 
     public function getCandidate(int $id)
     {
+
+        $tableFields = [
+            'id',
+            'name',
+            'email',
+            'is_active',
+            'created_at',
+            'updated_at',
+            'email_verified_at',
+        ];
 
         $usersId = $this->db->table('users_admin')->get()->getResult();
         $usersId = array_column($usersId, 'user_id');
 
         $this->whereNotIn('id', $usersId);
 
-        $candidate = $this->find($id);
+        $candidate = $this->select($tableFields)->find($id);
 
-        $candidate->applications = Factories::models(ApplicationModel::class)->applications($candidate->id);
+        if (!is_null($candidate)) {
+
+            $candidate->applications = Factories::models(ApplicationModel::class)->applications($candidate->id);
+        }
 
         return $candidate;
     }

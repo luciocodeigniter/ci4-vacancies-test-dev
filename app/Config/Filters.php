@@ -51,6 +51,7 @@ class Filters extends BaseConfig
         // API
         'api_auth'      => \App\Filters\API\AuthFilter::class,
         'api_verified'  => \App\Filters\API\VerifiedFilter::class,
+        'api_admin'     => \App\Filters\API\AdminFilter::class,
 
     ];
 

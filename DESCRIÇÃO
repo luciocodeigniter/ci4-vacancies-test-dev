@@ -10,7 +10,7 @@ Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
 
 
 Cada CRUD:
-Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
+Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 10 itens.
 Deve possuir formulários para criação e atualização de seus itens.
 Deve permitir a deleção de qualquer item de sua lista.
 Implementar validações de campos obrigatórios e tipos de dados.
