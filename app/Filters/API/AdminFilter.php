@@ -2,14 +2,10 @@
 
 namespace App\Filters\API;
 
-use App\Models\UserModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\Config\Factories;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
 
 class AdminFilter implements FilterInterface
 {
@@ -20,7 +16,6 @@ class AdminFilter implements FilterInterface
     public function __construct()
     {
         $this->response = service('response');
-        $this->userModel = Factories::models(UserModel::class);
     }
 
     /**
@@ -40,53 +35,22 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $key = getenv('JWT_SECRET');
-        $header = $request->getHeader("Authorization");
-        $token = null;
-
-
-        // extract the token from the header
-        if (!empty($header)) {
-            if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
-                $token = $matches[1];
-            }
-        }
-
-
-        // check if token is null or empty
-        if (is_null($token) || empty($token)) {
+        if (!$user = service('auth')->attemptValidateJWT($request)) {
 
             return $this->failUnauthorized('You are not logged in');
         }
 
-        try {
 
-
-            $decoded = JWT::decode($token, new Key($key, 'HS256'));
-
-            // Can we decode?
-            if (!$decoded) {
-
-                return $this->failUnauthorized('You are not logged in');
-            }
-
-            // Get the user
-            $user = $this->userModel->getByCriteria(['email' => $decoded->email]);
-
-            // We found?
-            if (is_null($user)) {
-
-                return $this->failUnauthorized('You are not logged in');
-            }
-
-            // Is admin?
-            if (!$this->userModel->isAdmin($user->id)) {
-
-                return $this->failUnauthorized('This area can only be accessed by an administrator');
-            }
-        } catch (\Exception $ex) {
+        // We found?
+        if (is_null($user)) {
 
             return $this->failUnauthorized('You are not logged in');
+        }
+
+        // Is admin?
+        if (!$user->is_admin) {
+
+            return $this->failUnauthorized("{$user->name}, This area can only be accessed by an administrator");
         }
     }
 

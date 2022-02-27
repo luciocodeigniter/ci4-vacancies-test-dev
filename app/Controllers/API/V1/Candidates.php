@@ -2,14 +2,14 @@
 
 namespace App\Controllers\API\V1;
 
-use App\Entities\Vacancy;
-use App\Models\VacancyModel;
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\UserModel as CandidateModel;
+use App\Entities\User as Candidate;
 
-class Vacancies extends ResourceController
+class Candidates extends ResourceController
 {
 
-    protected $modelName = VacancyModel::class;
+    protected $modelName = CandidateModel::class;
     protected $format    = 'json';
 
     /**
@@ -20,9 +20,9 @@ class Vacancies extends ResourceController
     public function index()
     {
         $response = [
-            'status'      => 200,
-            'message'   => 'Listing vacancies',
-            'vacancies' => $this->model->asArray()->findAll()
+            'status'        => 200,
+            'message'       => 'Listing candidates',
+            'candidates'    => $this->model->asArray()->getCandidates()
         ];
 
         return $this->respond($response);
@@ -35,17 +35,17 @@ class Vacancies extends ResourceController
      */
     public function show($id = null)
     {
-        $vacancy = $this->model->asObject()->find($id);
+        $candidate = $this->model->asObject()->getCandidate($id);
 
-        if (is_null($vacancy)) {
+        if (is_null($candidate)) {
 
-            return $this->failNotFound("Vacancy {$id} not found");
+            return $this->failNotFound("We didn't find the candidate {$id}");
         }
 
         $response = [
             'status'        => 200,
-            'message'       => "Showing vacancy $vacancy->title",
-            'vacancy'       => $vacancy
+            'message'       => "Showing candidate $candidate->name",
+            'candidate'     => $candidate
         ];
 
         return $this->respond($response);
@@ -69,21 +69,22 @@ class Vacancies extends ResourceController
             return $this->fail($response);
         }
 
-        $vacancy = new Vacancy($this->request->getPost());
+        $candidate = new Candidate($this->request->getPost());
 
-        if (!$this->model->save($vacancy)) {
+        $this->model->setValidationRule('is_active', 'required|in_list[0,1]');
+
+        if (!$this->model->protect(false)->save($candidate)) {
 
             return $this->failValidationErrors($this->model->errors());
         }
 
         $response = [
             'status'        => 201,
-            'message'       => "Vacancy created sucessful!",
+            'message'       => "Candidate created sucessful!",
         ];
 
         return $this->respondCreated($response);
     }
-
 
 
     /**
@@ -93,16 +94,18 @@ class Vacancies extends ResourceController
      */
     public function update($id = null)
     {
-        $vacancy = $this->model->find($id);
+        $candidate = $this->model->getCandidate($id);
 
-        if (is_null($vacancy)) {
+        if (is_null($candidate)) {
 
-            return $this->failNotFound("Vacancy {$id} not found");
+            return $this->failNotFound("We didn't find the candidate {$id}");
         }
 
-        $vacancy->fill($this->request->getRawInput());
+        unset($candidate->applications);
 
-        if (!$vacancy->hasChanged()) {
+        $candidate->fill($this->request->getRawInput());
+
+        if (!$candidate->hasChanged()) {
 
             $response = [
                 'status'        => 200,
@@ -112,14 +115,14 @@ class Vacancies extends ResourceController
             return $this->respond($response);
         }
 
-        if (!$this->model->save($vacancy)) {
+        if (!$this->model->protect(false)->save($candidate)) {
 
             return $this->failValidationErrors($this->model->errors());
         }
 
         $response = [
             'status'        => 200,
-            'message'       => "Vacancy updated sucessful!",
+            'message'       => "Candidate updated sucessful!",
         ];
 
         return $this->respond($response);
@@ -132,18 +135,18 @@ class Vacancies extends ResourceController
      */
     public function delete($id = null)
     {
-        $vacancy = $this->model->asObject()->find($id);
+        $candidate = $this->model->asObject()->getCandidate($id);
 
-        if (is_null($vacancy)) {
+        if (is_null($candidate)) {
 
-            return $this->failNotFound("Vacancy {$id} not found");
+            return $this->failNotFound("We didn't find the candidate {$id}");
         }
 
-        $this->model->delete($vacancy->id);
+        $this->model->delete($candidate->id);
 
         $response = [
             'status'        => 200,
-            'message'       => "Vacancy deleted sucessful!",
+            'message'       => "Candidate deleted sucessful!",
         ];
 
         return $this->respondDeleted($response);

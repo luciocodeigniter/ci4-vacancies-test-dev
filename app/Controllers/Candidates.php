@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\UserModel as CandidateModel;
 use CodeIgniter\Config\Factories;
 use App\Entities\User as Candidate;
-use Exception;
 
 class Candidates extends BaseController
 {
