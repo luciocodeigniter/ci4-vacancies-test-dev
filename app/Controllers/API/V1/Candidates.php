@@ -129,7 +129,7 @@ class Candidates extends ResourceController
     }
 
     /**
-     * Delete the designated resource object from the model
+     * Delete the designated resource object from the model.
      *
      * @return mixed
      */
