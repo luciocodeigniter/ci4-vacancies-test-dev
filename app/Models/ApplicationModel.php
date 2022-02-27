@@ -40,9 +40,11 @@ class ApplicationModel extends Model
     }
 
 
-    public function candidateHasThisJob(int $vacancyID): bool
+    public function candidateHasThisJob(int $vacancyID, $candidateID = null): bool
     {
-        $userAlreadyApplied = $this->where('vacancy_id', $vacancyID)->where('user_id', service('auth')->user()->id)->first();
+        $userID = $candidateID ?? service('auth')->user()->id;
+
+        $userAlreadyApplied = $this->where('vacancy_id', $vacancyID)->where('user_id', $userID)->first();
 
         return $userAlreadyApplied !== null;
     }
