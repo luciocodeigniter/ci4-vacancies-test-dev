@@ -44,15 +44,13 @@ class Jobs extends BaseController
 
     public function myJobs()
     {
-
-        $user = $this->populateUserFromJWTRequest();
-
         $response = [
             'status' => 200
         ];
 
-        $applications = $this->applicationModel->asArray()->applications($user->id);
+        $user = $this->getUserFromJWTRequest();
 
+        $applications = $this->applicationModel->asArray()->applications($user->id);
 
         if (empty($applications)) {
 
@@ -76,12 +74,11 @@ class Jobs extends BaseController
             return $this->failNotFound("We didn't find the vacancy {$id}");
         }
 
-
-        $user = $this->populateUserFromJWTRequest();
-
         $response = [
             'status'    => 200,
         ];
+
+        $user = $this->getUserFromJWTRequest();
 
         if ($this->applicationModel->candidateHasThisJob($vacancy->id, $user->id)) {
 
@@ -106,7 +103,40 @@ class Jobs extends BaseController
     }
 
 
-    private function populateUserFromJWTRequest()
+    public function givUp(int $id = null)
+    {
+        $vacancy = $this->vacancyModel->find($id);
+
+        if (is_null($vacancy)) {
+
+            return $this->failNotFound("We didn't find the vacancy {$id}");
+        }
+
+        $response = [
+            'status'    => 200,
+        ];
+
+        $user = $this->getUserFromJWTRequest();
+
+        if (!$this->applicationModel->candidateHasThisJob($vacancy->id, $user->id)) {
+
+            $response['message'] = 'You have not yet applied for this position.';
+
+            return $this->respond($response);
+        }
+
+        if (!$this->applicationModel->destroyCandidateApplication($vacancy->id, $user->id)) {
+
+            return $this->failServerError("{$user->name}, it was not possible to process the withdrawal of the application");
+        }
+
+        $response['message'] = 'Withdrawal successful!';
+
+        return $this->respond($response);
+    }
+
+
+    private function getUserFromJWTRequest()
     {
         // We can safely retrieve the user from the JWT as the api_auth filter has already taken care of the JWT validation
         $user = service('auth')->attemptValidateJWT(service('request'));

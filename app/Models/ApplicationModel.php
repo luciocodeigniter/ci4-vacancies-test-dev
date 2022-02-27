@@ -50,10 +50,13 @@ class ApplicationModel extends Model
     }
 
 
-    public function destroyCandidateApplication(int $vacancyID)
+    public function destroyCandidateApplication(int $vacancyID, $candidateID = null)
     {
+
+        $userID = $candidateID ?? service('auth')->user()->id;
+
         return $this
-            ->where('user_id', service('auth')->user()->id)
+            ->where('user_id', $userID)
             ->where('vacancy_id', $vacancyID)
             ->delete();
     }
