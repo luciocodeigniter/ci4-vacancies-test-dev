@@ -15,7 +15,7 @@ class AuthFilter implements FilterInterface
     {
         $auth = service('auth');
 
-        if (!$auth->isLoggedIn()) {
+        if (!$auth->check()) {
 
             return redirect()->route('login')->with('info', 'Realize o login primeiramente');
         }

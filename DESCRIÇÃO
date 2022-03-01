@@ -1,23 +1,23 @@
 CRUD de vagas:
-Criar, editar, excluir e listar vagas.
-A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
+DONE! - Criar, editar, excluir e listar vagas.
+DONE! - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
 
 
 CRUD de candidatos:
-Criar, editar, excluir e listar candidatos.
-Um cadidato pode se inscrever em uma ou mais vagas.
-Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
+DONE! - Criar, editar, excluir e listar candidatos.
+DONE! - Um cadidato pode se inscrever em uma ou mais vagas.
+DONE! - Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
 
 
 Cada CRUD:
-Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 10 itens.
-Deve possuir formulários para criação e atualização de seus itens.
-Deve permitir a deleção de qualquer item de sua lista.
-Implementar validações de campos obrigatórios e tipos de dados.
-Testes unitários e de unidade.
+DONE! - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 10 itens.
+DONE! - Deve possuir formulários para criação e atualização de seus itens.
+DONE! - Deve permitir a deleção de qualquer item de sua lista.
+DONE! - Implementar validações de campos obrigatórios e tipos de dados.
+NOT DONE! - Testes unitários e de unidade.
 
 
-API Rest JSON para todos os CRUDS listados acima.
-Permitir deleção em massa de itens nos CRUDs.
-Permitir que o usuário mude o número de itens por página.
-Implementar autenticação de usuário na aplicação.
+DONE! - API Rest JSON para todos os CRUDS listados acima.
+DONE! - Permitir deleção em massa de itens nos CRUDs.
+DONE! - Permitir que o usuário mude o número de itens por página.
+DONE! - Implementar autenticação de usuário na aplicação.

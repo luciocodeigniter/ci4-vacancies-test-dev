@@ -1,11 +1,18 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "luciocodeigniter/ci4-vacancies-test-dev",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
+    "description": "Simples sistema de gestão de vagas de emprego",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucio Souza",
+            "email": "luciocodeigniter@gmail.com",
+            "homepage": "https://vouaprender.dev.br",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": ">=8.0",
         "codeigniter4/framework": "^4",
         "firebase/php-jwt": "^6.0"
     },

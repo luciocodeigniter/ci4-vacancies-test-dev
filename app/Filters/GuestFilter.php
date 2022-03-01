@@ -27,7 +27,7 @@ class GuestFilter implements FilterInterface
     {
         $auth = service('auth');
 
-        if ($auth->isLoggedIn()) {
+        if ($auth->check()) {
 
             return redirect()->back();
         }

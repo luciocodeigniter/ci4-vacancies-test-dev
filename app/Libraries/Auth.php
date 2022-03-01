@@ -69,7 +69,7 @@ class Auth
         return $this->user;
     }
 
-    public function isLoggedIn(): bool
+    public function check(): bool
     {
         // Is anyone in the session?
         return !is_null($this->user());

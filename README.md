@@ -1,63 +1,78 @@
-# CodeIgniter 4 Application Starter
+# CodeIgniter 4 - Sistema de Gestão de Vagas de Emprego
 
-## What is CodeIgniter?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+## Sobre
+Sistema de Gestão de Vagas de Emprego criado para o Teste para candidatos à vaga de Desenvolvedor PHP Pleno.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- Livremente Inspirado em: https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-pleno.md
+- Não me candidatei à vaga. Apenas resolvi implemntar o desafio em Codeigniter 4 a fim de refinar meu conhecimentos acerca do Framework. 
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
-
-## Installation & updates
+## Instalação
 
 `composer create-project codeigniter4/appstarter` then `composer update` whenever
 there is a new release of the framework.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
 
-## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## Configurando
 
-## Important Change with index.php
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+### 1. Configurando o arquivo .env
+Renomeie o arquivo env-exemple para `.env`
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 2. Defina o ambiente de desenvolvimento
+```sh
+CI_ENVIRONMENT = development
+```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### 3. Defina sua URL base e remova o `index` da url
+```sh
+app.baseURL = 'http://vacancies-test-dev.test/' # Utilizado Laragon que já cria o Virtualhost e adiciona no arquivo de hosts
+app.indexPage = ''
+```
 
-## Repository Management
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 4. Crie seu banco de dados e adicione as informações do banco no arquivo .env
+```sh
+database.default.hostname = localhost
+database.default.database = vacancies-test-dev
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+```
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### 4. Crie as tabelas no banco de dados rodando o seguinte comando a partir da raiz do projeto
+```sh
+php spark migrate
+```
 
-## Server Requirements
+### 5. Semeie os dados iniciais rodando o seguinte comando a partir da raiz do projeto
+```sh
+php spark db:seed InitialDataSeeder
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+
+Com o apache e o MySql iniciados no Laragon, acesse a URL no navegador:
+http://vacancies-test-dev.test/
+
+Credenciais admin:
+
+E-mail: admin@admin.com
+Senha: 123456
+```
+
+
+## Requisitos do servidor
+
+É necessário PHP versão 8.0 ou superior, com as seguintes extensões instaladas:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- [libcurl](http://php.net/manual/en/curl.requirements.php) se você planeja usar a biblioteca HTTP\CURLRequest
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Além disso, certifique-se de que as seguintes extensões estejam habilitadas em seu PHP:
 
-- json (enabled by default - don't turn it off)
+- json (habilitado por padrão - não desligue)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+- xml (ativado por padrão - não desligue)
