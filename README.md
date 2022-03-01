@@ -10,9 +10,7 @@ Sistema de Gestão de Vagas de Emprego criado para o Teste para candidatos à va
 
 ## Instalação
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
-
+`composer create-project luciocodeigniter/ci4-vacancies-test-dev` 
 
 
 ## Configurando
