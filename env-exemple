@@ -8,7 +8,7 @@ CI_ENVIRONMENT = development
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = 'http://vacancies-test-dev.test/'
+app.baseURL = 'http://ci4-vacancies-test-dev.test/'
 app.indexPage = ''
 
 #--------------------------------------------------------------------
@@ -32,8 +32,8 @@ email.fromEmail='no-reply@codeigniter.com'
 email.fromName='CodeIgniter 4 - Vacancies - test - dev'
 email.protocol='smtp'
 email.SMTPHost='smtp.mailtrap.io'
-email.SMTPUser='67936ba10cad94' // required....
-email.SMTPPass='0f14eb041e080b' // required
+email.SMTPUser='' // required
+email.SMTPPass='' // required
 email.SMTPPort=2525
 email.SMTPCrypto=''
 

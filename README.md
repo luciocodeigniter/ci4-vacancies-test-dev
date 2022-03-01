@@ -26,7 +26,7 @@ CI_ENVIRONMENT = development
 
 ### 3. Defina sua URL base e remova o `index` da url
 ```sh
-app.baseURL = 'http://vacancies-test-dev.test/' # Utilizado Laragon que já cria o Virtualhost e adiciona no arquivo de hosts
+app.baseURL = 'http://ci4-vacancies-test-dev.test/' # Utilizado Laragon que já cria o Virtualhost e adiciona no arquivo de hosts
 app.indexPage = ''
 ```
 
@@ -52,12 +52,22 @@ php spark db:seed InitialDataSeeder
 
 
 Com o apache e o MySql iniciados no Laragon, acesse a URL no navegador:
-http://vacancies-test-dev.test/
+http://ci4-vacancies-test-dev.test/
 
-Credenciais admin:
+Credenciais usuário admin:
 
 E-mail: admin@admin.com
 Senha: 123456
+
+
+Credenciais usuário candidato:
+
+Logue como admin e acesse a rota `http://ci4-vacancies-test-dev.test/candidates` para escolher qualquer e-mail:
+
+Para todos os candidados, a senha é:
+
+123456
+
 ```
 
 
