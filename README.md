@@ -9,6 +9,7 @@ Sistema de Gestão de Vagas de Emprego criado para o Teste para candidatos à va
 
 
 ## Instalação
+Dentro do diretório `www` do Laragon, rode o seguinte comando:
 
 `composer create-project luciocodeigniter/ci4-vacancies-test-dev` 
 
