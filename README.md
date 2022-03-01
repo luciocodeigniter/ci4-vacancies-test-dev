@@ -5,7 +5,7 @@
 Sistema de Gestão de Vagas de Emprego criado para o Teste para candidatos à vaga de Desenvolvedor PHP Pleno.
 
 - Livremente Inspirado em: https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-pleno.md
-- Não me candidatei à vaga. Apenas resolvi implemntar o desafio em Codeigniter 4 a fim de refinar meu conhecimentos acerca do Framework. 
+- Não me candidatei à vaga. Apenas resolvi implementar o desafio em Codeigniter 4 a fim de refinar meu conhecimentos acerca do Framework. 
 
 
 ## Instalação
@@ -51,7 +51,7 @@ php spark migrate
 php spark db:seed InitialDataSeeder
 
 
-Com o apache e o MySql iniciados no Laragon, acesse a URL no navegador:
+Acesse a URL no navegador:
 http://ci4-vacancies-test-dev.test/
 
 Credenciais usuário admin:
@@ -68,6 +68,11 @@ Para todos os candidados, a senha é:
 
 123456
 
+```
+
+### 6. Para conhecer todas as rotas que foram definidas no projeto, rode o seguinte comando a partir da raiz do projeto
+```sh
+php spark routes
 ```
 
 
