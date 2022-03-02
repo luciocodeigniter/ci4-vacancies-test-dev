@@ -7,6 +7,32 @@ Sistema de Gestão de Vagas de Emprego criado para o Teste para candidatos à va
 - Livremente Inspirado em: https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-pleno.md
 - Não me candidatei à vaga. Apenas resolvi implementar o desafio em Codeigniter 4 a fim de refinar meu conhecimentos acerca do Framework. 
 
+## Descrição do desafio
+
+### CRUD de vagas:
+- DONE! - Criar, editar, excluir e listar vagas.
+- DONE! - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
+
+
+### CRUD de candidatos:
+- DONE! - Criar, editar, excluir e listar candidatos.
+- DONE! - Um cadidato pode se inscrever em uma ou mais vagas.
+- DONE! - Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
+
+
+### Cada CRUD:
+- DONE! - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 10 itens.
+- DONE! - Deve possuir formulários para criação e atualização de seus itens.
+- DONE! - Deve permitir a deleção de qualquer item de sua lista.
+- DONE! - Implementar validações de campos obrigatórios e tipos de dados.
+- NOT DONE! - Testes unitários e de unidade.
+
+### API Rest JSON [Documentação API](api-docs/api.md):
+- DONE! - API Rest JSON para todos os CRUDS listados acima.
+- DONE! - Permitir deleção em massa de itens nos CRUDs.
+- DONE! - Permitir que o usuário mude o número de itens por página.
+- DONE! - Implementar autenticação de usuário na aplicação.
+
 
 ## Instalação
 Dentro do diretório `www` do Laragon, rode o seguinte comando:
