@@ -112,6 +112,8 @@ class Candidates extends BaseController
             return redirect()->back()->with('info', "Não há dados para atualizar");
         }
 
+        unset($candidate->applications);
+
         if (!$this->candidateModel->protect(false)->save($candidate)) {
 
             return redirect()->back()
