@@ -107,13 +107,14 @@ $routes->group('jobs', ['filter' => 'verified'], function ($routes) {
 $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function ($routes) {
 
     // Login
-    $routes->post('login', 'Login::index');
+    $routes->post('login', 'Jwtauth::login');
+    $routes->post('register', 'Jwtauth::register');
+    $routes->get('user', 'Jwtauth::user');
+
 
     // Vacancies
     $routes->resource('vacancies', ['filter' => 'api_admin', 'except' => 'new,edit']);
 
-    // Register
-    $routes->resource('register', ['only' => 'create']);
 
     // Jobs - applications
     $routes->group('jobs', ['filter' => 'api_verified', 'namespace' => 'App\Controllers\API\V1'], function ($routes) {
