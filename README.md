@@ -55,23 +55,23 @@ http://ci4-vacancies-test-dev.test/
 
 Credenciais usuário admin:
 
-`E-mail: admin@admin.com
-Senha: 123456`
+E-mail: admin@admin.com
+Senha: 123456
 
 ----------------------------------------------
 
 Para logar como candidato:
 
-Logue como admin e acesse a rota `http://ci4-vacancies-test-dev.test/candidates` para escolher qualquer e-mail:
+Logue como admin e acesse a rota http://ci4-vacancies-test-dev.test/candidates para escolher qualquer e-mail:
 
 Para todos os candidados, a senha é:
 
-`123456`
+123456
 
 
 Ou crie uma conta acessando a rota:
 
-`http://ci4-vacancies-test-dev.test/register`
+http://ci4-vacancies-test-dev.test/register
 
 ```
 
