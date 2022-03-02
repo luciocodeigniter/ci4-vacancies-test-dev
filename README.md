@@ -91,3 +91,7 @@ Além disso, certifique-se de que as seguintes extensões estejam habilitadas em
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (ativado por padrão - não desligue)
+
+
+## Documentação API
+- [api/docs](api-docs/api.md)

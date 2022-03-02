@@ -1,6 +1,6 @@
 ## Autenticando na api
 
-Envie um POST para o endpoint `http://ci4-vacancies-test-dev.test/api/login` com credencias válidas e veja resposta:
+Envie uma requisição POST para o endpoint `http://ci4-vacancies-test-dev.test/api/login` com credencias válidas e veja resposta:
 
 ```sh
 
@@ -16,7 +16,7 @@ Envie um POST para o endpoint `http://ci4-vacancies-test-dev.test/api/login` com
 
 ## Criando uma conta
 
-Envie um POST para o endpoint `http://ci4-vacancies-test-dev.test/api/register` com credencias válidas e veja resposta:
+Envie uma requisição ` POST ` para o endpoint `http://ci4-vacancies-test-dev.test/api/register` com credencias válidas e veja resposta:
 
 ```sh
 
@@ -30,18 +30,18 @@ Envie um POST para o endpoint `http://ci4-vacancies-test-dev.test/api/register` 
 
 ## Recuperando user
 
-Envie um GET para o endpoint `http://ci4-vacancies-test-dev.test/api/user`
+Envie uma requisição ` GET ` para o endpoint `http://ci4-vacancies-test-dev.test/api/user`
 
 
 ## Rotas do admin
 
 ### Candidates
-Para listar os cadidatos, envie uma requisição ``` GET ```para o endpoint abaixo:
+Para listar os cadidatos, envie uma requisição ` GET ` para o endpoint abaixo:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates
 
 
-Para recuperar um cadidato específico, envie uma requisição ``` GET ``` para o endpoint abaixo, informando o ID do do candidato:
+Para recuperar um cadidato específico, envie uma requisição ` GET ` para o endpoint abaixo, informando o ID do do candidato:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
@@ -61,12 +61,12 @@ string password_confirmation
 
 ```
 
-Para atualizar um cadidato, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo:
+Para atualizar um cadidato, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
 
-Para excluir um cadidato, envie uma requisição ``` DELETE ``` para o endpoint abaixo:
+Para excluir um cadidato, envie uma requisição ``` DELETE ``` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
@@ -98,12 +98,12 @@ string is_paused (0,1)
 
 ```
 
-Para atualizar uma vaga de emprego, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo:
+Para atualizar uma vaga de emprego, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies/1
 
 
-Para excluir uma vaga de emprego, envie uma requisição ``` DELETE ``` para o endpoint abaixo:
+Para excluir uma vaga de emprego, envie uma requisição ``` DELETE ``` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies/1
 
