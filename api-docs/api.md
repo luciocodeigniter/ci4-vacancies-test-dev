@@ -1,6 +1,6 @@
 ## Autenticando na api
 
-Envie uma requisição POST para o endpoint `http://ci4-vacancies-test-dev.test/api/login` com credencias válidas e veja resposta:
+Envie uma requisição ` POST ` para o endpoint `http://ci4-vacancies-test-dev.test/api/login` com credencias válidas e veja resposta:
 
 ```sh
 
@@ -33,7 +33,7 @@ Envie uma requisição ` POST ` para o endpoint `http://ci4-vacancies-test-dev.t
 Envie uma requisição ` GET ` para o endpoint `http://ci4-vacancies-test-dev.test/api/user`
 
 
-## Rotas do admin
+## Rotas que o admin tem acesso
 
 ### Candidates
 Para listar os cadidatos, envie uma requisição ` GET ` para o endpoint abaixo:
@@ -46,7 +46,7 @@ Para recuperar um cadidato específico, envie uma requisição ` GET ` para o en
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
 
-Para criar um cadidato, envie uma requisição ``` POST ``` para o endpoint abaixo:
+Para criar um cadidato, envie uma requisição ` POST ` para o endpoint abaixo:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates
 
@@ -61,29 +61,29 @@ string password_confirmation
 
 ```
 
-Para atualizar um cadidato, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo, informando o ID:
+Para atualizar um cadidato, envie uma requisição ` PUT/PATCH ` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
 
-Para excluir um cadidato, envie uma requisição ``` DELETE ``` para o endpoint abaixo, informando o ID:
+Para excluir um cadidato, envie uma requisição ` DELETE ` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/cadidates/1
 
 
 ### Vacancies
 
-Para listar as vagas de emprego, envie uma requisição ``` GET ``` para o endpoint abaixo:
+Para listar as vagas de emprego, envie uma requisição ` GET ` para o endpoint abaixo:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies
 
 
-Para recuperar uma vaga de emprego específica, envie uma requisição ``` GET ``` para o endpoint abaixo:
+Para recuperar uma vaga de emprego específica, envie uma requisição ` GET ` para o endpoint abaixo:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies/1
 
 
-Para criar uma vaga de emprego, envie uma requisição ``` POST ``` para o endpoint abaixo:
+Para criar uma vaga de emprego, envie uma requisição ` POST ` para o endpoint abaixo:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies
 
@@ -98,13 +98,32 @@ string is_paused (0,1)
 
 ```
 
-Para atualizar uma vaga de emprego, envie uma requisição ``` PUT/PATCH ``` para o endpoint abaixo, informando o ID:
+Para atualizar uma vaga de emprego, envie uma requisição ` PUT/PATCH ` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies/1
 
 
-Para excluir uma vaga de emprego, envie uma requisição ``` DELETE ``` para o endpoint abaixo, informando o ID:
+Para excluir uma vaga de emprego, envie uma requisição ` DELETE ` para o endpoint abaixo, informando o ID:
 
 - http://ci4-vacancies-test-dev.test/api/vacancies/1
 
 
+## Rotas que o candidato tem acesso
+
+Para listar as vagas para se candidatar, envie uma requisição ` GET ` para o endpoint abaixo:
+
+- http://ci4-vacancies-test-dev.test/api/jobs
+
+Para se candidatar a uma vaga, envie uma requisição ` PUT ` para o endpoint abaixo:
+
+- http://ci4-vacancies-test-dev.test/api/jobs/apply/1
+
+
+Para se desistir de uma candidatura já realizada, envie uma requisição ` DELETE ` para o endpoint abaixo:
+
+- http://ci4-vacancies-test-dev.test/api/jobs/givup/1
+
+
+Para listar as vagas que o você já se candidatou, envie uma requisição ` GET ` para o endpoint abaixo:
+
+- http://ci4-vacancies-test-dev.test/api/jobs/my

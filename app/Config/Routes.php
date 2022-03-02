@@ -116,6 +116,10 @@ $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function
     $routes->resource('vacancies', ['filter' => 'api_admin', 'except' => 'new,edit']);
 
 
+    // Candidates
+    $routes->resource('candidates', ['filter' => 'api_admin', 'except' => 'new,edit']);
+
+
     // Jobs - applications
     $routes->group('jobs', ['filter' => 'api_verified', 'namespace' => 'App\Controllers\API\V1'], function ($routes) {
         $routes->get('/', 'Jobs::index',);
@@ -123,9 +127,6 @@ $routes->group('api', ['namespace' => 'App\Controllers\API\V1'], static function
         $routes->put('apply/(:num)', 'Jobs::apply/$1',);
         $routes->delete('givup/(:num)', 'Jobs::givUp/$1',);
     });
-
-    // Candidates
-    $routes->resource('candidates', ['filter' => 'api_admin', 'except' => 'new,edit']);
 });
 
 
