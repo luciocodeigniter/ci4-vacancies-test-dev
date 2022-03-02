@@ -20,19 +20,14 @@ Dentro do diretório `www` do Laragon, rode o seguinte comando:
 ### 1. Configurando o arquivo .env
 Renomeie o arquivo env-exemple para `.env`
 
-### 2. Defina o ambiente de desenvolvimento
-```sh
-CI_ENVIRONMENT = development
-```
-
-### 3. Defina sua URL base e remova o `index` da url
+### 2. Defina sua URL base e remova o `index` da url
 ```sh
 app.baseURL = 'http://ci4-vacancies-test-dev.test/' # Utilizado Laragon que já cria o Virtualhost e adiciona no arquivo de hosts
 app.indexPage = ''
 ```
 
 
-### 4. Crie seu banco de dados e adicione as informações do banco no arquivo .env
+### 3. Crie seu banco de dados e adicione as informações do banco no arquivo .env
 ```sh
 database.default.hostname = localhost
 database.default.database = vacancies-test-dev
@@ -51,23 +46,32 @@ php spark migrate
 ```sh
 php spark db:seed InitialDataSeeder
 
+---------------------------------------------
 
 Acesse a URL no navegador:
 http://ci4-vacancies-test-dev.test/
 
+---------------------------------------------
+
 Credenciais usuário admin:
 
-E-mail: admin@admin.com
-Senha: 123456
+`E-mail: admin@admin.com
+Senha: 123456`
 
+----------------------------------------------
 
-Credenciais usuário candidato:
+Para logar como candidato:
 
 Logue como admin e acesse a rota `http://ci4-vacancies-test-dev.test/candidates` para escolher qualquer e-mail:
 
 Para todos os candidados, a senha é:
 
-123456
+`123456`
+
+
+Ou crie uma conta acessando a rota:
+
+`http://ci4-vacancies-test-dev.test/register`
 
 ```
 
