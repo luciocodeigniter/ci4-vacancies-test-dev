@@ -6,7 +6,6 @@ use App\Entities\User;
 use App\Libraries\Token;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Model;
-use PharIo\Manifest\Application;
 
 class UserModel extends Model
 {
@@ -180,5 +179,16 @@ class UserModel extends Model
     {
         unset($this->validationRules['password']);
         unset($this->validationRules['password_confirmation']);
+    }
+
+    public function deleteCandidate(int|array $idToDelete)
+    {
+        if (is_int($idToDelete)) {
+
+            return $this->delete($idToDelete);
+        }
+
+        // We guarantee that the admin id will not be deleted, since this area is accessed only by admin
+        return $this->where('id !=', service('auth')->user()->id)->whereIn('id', $idToDelete)->delete();
     }
 }

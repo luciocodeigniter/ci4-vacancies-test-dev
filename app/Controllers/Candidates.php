@@ -134,7 +134,7 @@ class Candidates extends BaseController
             return redirect()->route('candidates')->with('danger', "Candidato {$id} não encontrado");
         }
 
-        $this->candidateModel->delete($candidate->id);
+        $this->candidateModel->deleteCandidate($candidate->id);
 
         return redirect()->route('candidates')->with('success', "Candidato excluído com sucesso!");
     }
@@ -152,14 +152,14 @@ class Candidates extends BaseController
 
         if (is_array($idsToDelete) && !empty($idsToDelete)) {
 
-            // We guarantee that the admin id will not be deleted
-            if (!in_array(service('auth')->user()->id, $idsToDelete)) {
+            $this->candidateModel->deleteCandidate($idsToDelete);
 
-                $this->candidateModel->whereIn('id', $idsToDelete)->delete();
-            }
+            session()->setFlashdata('success', 'Registros excluídos com sucesso!');
+
+            return $this->response->setJSON([]);
         }
 
-        session()->setFlashdata('success', 'Registros excluídos com sucesso!');
+        session()->setFlashdata('danger', 'Não foi informado nenhum identificador para realizar a exclusão');
 
         return $this->response->setJSON([]);
     }
