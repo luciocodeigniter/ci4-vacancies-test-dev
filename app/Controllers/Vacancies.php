@@ -17,7 +17,6 @@ class Vacancies extends BaseController
 
     public function index()
     {
-        $request = (object) $this->request->getGet();
 
         $data = [
             'title' => 'Listando as Vagas',
