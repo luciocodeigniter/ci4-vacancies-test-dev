@@ -82,7 +82,7 @@ class Register extends BaseController
         $user = $this->userModel->getByCriteria(['id' => $id]);
 
         // Since the user was created, now we can send email activation
-        Events::trigger('notity_activation_email', $user->email, $token);
+        Events::trigger('notify_activation_email', $user->email, $token);
 
         return $user;
     }

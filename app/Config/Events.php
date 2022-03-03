@@ -54,7 +54,7 @@ Events::on('pre_system', static function () {
     /**
      * Send e-mail with link to activate account
      */
-    Events::on('notity_activation_email', function ($email, $token) {
+    Events::on('notify_activation_email', function ($email, $token) {
 
         Factories::class(Notify::class)->sendEmailActivation($email, $token);
     });
@@ -72,7 +72,7 @@ Events::on('pre_system', static function () {
     /**
      * Resend e-mail with link to activate account
      */
-    Events::on('notity_resend_activation_email', function ($email, $token) {
+    Events::on('notify_resend_activation_email', function ($email, $token) {
 
         Factories::class(Notify::class)->resendEmailActivation($email, $token);
     });
